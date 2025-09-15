@@ -6,10 +6,139 @@ const description = "To be done";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #ffffff;
+        --secondary-color: #cccccc;
+        --accent-color: #8b5cf6;
+        --text-color: #ffffff;
+        --bg-color: #000000;
+        --terminal-bg: #111111;
+        --border-color: #333333;
+        --shadow-color: rgba(139, 92, 246, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        line-height: 1.6;
+        color: var(--text-color);
+        background: var(--bg-color);
+        background-image: 
+          radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.02) 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+          linear-gradient(90deg, rgba(139, 92, 246, 0.12) 1px, transparent 1px),
+          linear-gradient(rgba(139, 92, 246, 0.12) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 90%;
+        padding: 3rem;
+        background: var(--terminal-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: 
+          0 0 20px var(--shadow-color),
+          inset 0 0 20px rgba(139, 92, 246, 0.02);
+        position: relative;
+      }
+
+
+      h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        text-align: center;
+        position: relative;
+        letter-spacing: -0.02em;
+      }
+
+      h2::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 2px;
+        background: var(--accent-color);
+        margin: 0.8rem auto 0;
+      }
+
+      p {
+        font-size: 1.3rem;
+        color: var(--secondary-color);
+        text-align: center;
+        line-height: 1.8;
+        font-style: italic;
+        position: relative;
+      }
+
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 2rem 1.5rem;
+          margin: 1rem;
+        }
+        
+        
+        h2 {
+          font-size: 2rem;
+        }
+        
+        p {
+          font-size: 1.1rem;
+        }
+        
+      }
+
+      /* Subtle animation */
+      .container {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
   <body>
-    <h2>{description}</h2>
-	<p>Into a cool little blog</p>
+    <div class="container">
+      
+      <h2>{description}</h2>
+      <p>Into a cool little blog</p>
+    </div>
   </body>
 </html>
