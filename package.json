@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/inter-tight": "^5.2.7",
     "astro": "^5.13.7"
   },
   "devDependencies": {

@@ -1,0 +1,21 @@
+---
+import "@fontsource/inter-tight";
+import Topbar from "../components/topbar.astro";
+const {title} = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans bg-alice_blue text-davy_gray min-h-screen">
+    <!-- Top Navigation Bar -->
+    <Topbar />
+
+    <!-- Main Content Area -->
+    <main class="max-w-3xl mx-auto px-6 py-12">
+      <slot />
+    </main>
+  </body>
+</html>

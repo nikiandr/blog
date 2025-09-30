@@ -1,0 +1,31 @@
+---
+const elements = [
+  {
+    label: "About Me",
+    href: "#",
+  },
+  {
+    label: "Photos",
+    href: "#",
+  },
+  {
+    label: "Blog",
+    href: "#",
+  },
+  {
+    label: "Contact",
+    href: "#",
+  },
+];
+---
+    <nav class="w-full px-6 py-4 bg-alice_blue border-b border-platinum/30">
+      <div class="max-w-6xl mx-auto flex justify-center">
+        <div class="flex space-x-12">
+          {elements.map((element) => (
+            <a href={element.href} class="text-payne_gray hover:text-thistle transition-colors duration-200 font-normal text-base">
+              {element.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>

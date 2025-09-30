@@ -1,52 +1,18 @@
 ---
-// Blog main page
-const title = "Nikiandr Blog";
-const description = "To be done";
+import Layout from "../layouts/layout.astro";
+
+const title = "Some Blog";
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
-    <style>
-      /* Custom background patterns that can't be achieved with pure Tailwind */
-      body {
-        background-image: 
-          radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.02) 0%, transparent 50%),
-          radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
-      }
-
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: 
-          linear-gradient(90deg, rgba(139, 92, 246, 0.12) 1px, transparent 1px),
-          linear-gradient(rgba(139, 92, 246, 0.12) 1px, transparent 1px);
-        background-size: 20px 20px;
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      /* Custom pseudo-element for h2 accent line */
-      .title-accent::after {
-        content: '';
-        display: block;
-        width: 80px;
-        height: 2px;
-        background: #8b5cf6;
-        margin: 0.8rem auto 0;
-      }
-    </style>
-  </head>
-  <body class="font-mono leading-relaxed text-text bg-bg min-h-screen flex items-center justify-center relative">
-    <div class="max-w-3xl w-[90%] p-12 md:p-8 sm:p-6 bg-terminal-bg border border-border rounded-lg shadow-[0_0_20px_rgba(139,92,246,0.1),inset_0_0_20px_rgba(139,92,246,0.02)] relative animate-fadeInUp sm:m-4">
-      <h2 class="text-4xl md:text-3xl sm:text-2xl font-bold text-primary mb-6 text-center relative tracking-tight title-accent">{description}</h2>
-      <p class="text-xl md:text-lg sm:text-base text-secondary text-center leading-relaxed italic relative">Into a cool little blog</p>
-    </div>
-  </body>
-</html>
+<Layout title={title}>
+  <h1 class="text-center text-3xl">
+    To be done
+  </h1>
+  <div class="px-12 py-4">
+    <p class="px-4">
+      Some day when I have more time I will finish this blog and post here my thoughts.
+    </p>
+    <p class="px-4">
+      Now it is just a placeholder with some first version of design.
+    </p>
+  </div>
+</Layout>
