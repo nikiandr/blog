@@ -6,32 +6,32 @@
 
 @layer components {
   .prose {
-    @apply max-w-none text-davy_gray text-base leading-relaxed;
+    @apply max-w-none text-davy_gray dark:text-silver_gray-500 text-base leading-relaxed transition-colors duration-200;
   }
 
   /* Headings */
   .prose h1 {
-    @apply text-4xl font-light text-payne_gray mb-6 mt-8 leading-tight first:mt-0;
+    @apply text-4xl font-light text-payne_gray dark:text-silver_gray mb-6 mt-8 leading-tight first:mt-0 transition-colors duration-200;
   }
 
   .prose h2 {
-    @apply text-3xl font-light text-payne_gray mb-5 mt-7 leading-tight first:mt-0;
+    @apply text-3xl font-light text-payne_gray dark:text-silver_gray mb-5 mt-7 leading-tight first:mt-0 transition-colors duration-200;
   }
 
   .prose h3 {
-    @apply text-2xl font-normal text-payne_gray mb-4 mt-6 leading-snug first:mt-0;
+    @apply text-2xl font-normal text-payne_gray dark:text-silver_gray mb-4 mt-6 leading-snug first:mt-0 transition-colors duration-200;
   }
 
   .prose h4 {
-    @apply text-xl font-medium text-payne_gray mb-3 mt-5 leading-snug first:mt-0;
+    @apply text-xl font-medium text-payne_gray dark:text-silver_gray mb-3 mt-5 leading-snug first:mt-0 transition-colors duration-200;
   }
 
   .prose h5 {
-    @apply text-lg font-medium text-payne_gray mb-3 mt-4 leading-normal first:mt-0;
+    @apply text-lg font-medium text-payne_gray dark:text-silver_gray mb-3 mt-4 leading-normal first:mt-0 transition-colors duration-200;
   }
 
   .prose h6 {
-    @apply text-base font-semibold text-payne_gray mb-2 mt-4 leading-normal first:mt-0;
+    @apply text-base font-semibold text-payne_gray dark:text-silver_gray mb-2 mt-4 leading-normal first:mt-0 transition-colors duration-200;
   }
 
   /* Paragraphs */
@@ -41,15 +41,15 @@
 
   /* Links */
   .prose a {
-    @apply text-davy_gray no-underline transition-colors duration-200;
+    @apply text-davy_gray dark:text-midnight_purple no-underline transition-colors duration-200;
   }
 
   .prose a:hover {
-    @apply text-thistle;
+    @apply text-thistle dark:text-midnight_purple-600;
   }
 
   .prose a:focus {
-    @apply outline-none ring-2 ring-thistle/50 ring-offset-2;
+    @apply outline-none ring-2 ring-thistle/50 dark:ring-midnight_purple/50 ring-offset-2 dark:ring-offset-dark_slate-400;
   }
 
   /* Lists */
@@ -74,20 +74,20 @@
 
   /* Code */
   .prose code {
-    @apply bg-platinum/20 text-payne_gray-700 px-1.5 py-0.5 rounded text-sm;
+    @apply bg-platinum/20 dark:bg-slate_border text-payne_gray-700 dark:text-silver_gray-300 px-1.5 py-0.5 rounded text-sm transition-colors duration-200;
   }
 
   .prose pre {
-    @apply bg-payne_gray-900 text-alice_blue-800 p-4 rounded-lg mb-4 overflow-x-auto;
+    @apply bg-payne_gray-900 dark:bg-dark_slate-100 text-alice_blue-800 dark:text-silver_gray-200 p-4 rounded-lg mb-4 overflow-x-auto transition-colors duration-200;
   }
 
   .prose pre code {
-    @apply bg-transparent text-alice_blue-800 p-0 text-sm leading-relaxed;
+    @apply bg-transparent text-alice_blue-800 dark:text-silver_gray-200 p-0 text-sm leading-relaxed;
   }
 
   /* Blockquotes */
   .prose blockquote {
-    @apply border-l-4 border-thistle bg-platinum/10 pl-4 py-2 pr-4 my-6 italic text-davy_gray/90;
+    @apply border-l-4 border-thistle dark:border-midnight_purple bg-platinum/10 dark:bg-slate_border/30 pl-4 py-2 pr-4 my-6 italic text-davy_gray/90 dark:text-silver_gray-400 transition-colors duration-200;
   }
 
   .prose blockquote p {
@@ -100,28 +100,28 @@
   }
 
   .prose thead {
-    @apply bg-platinum/20 border-b-2 border-platinum;
+    @apply bg-platinum/20 dark:bg-slate_border/40 border-b-2 border-platinum dark:border-slate_border transition-colors duration-200;
   }
 
   .prose th {
-    @apply px-4 py-3 text-left font-semibold text-payne_gray;
+    @apply px-4 py-3 text-left font-semibold text-payne_gray dark:text-silver_gray transition-colors duration-200;
   }
 
   .prose tbody tr {
-    @apply border-b border-platinum/40 transition-colors duration-150;
+    @apply border-b border-platinum/40 dark:border-slate_border transition-colors duration-150;
   }
 
   .prose tbody tr:hover {
-    @apply bg-platinum/5;
+    @apply bg-platinum/5 dark:bg-slate_border/20;
   }
 
   .prose td {
-    @apply px-4 py-3 text-davy_gray;
+    @apply px-4 py-3 text-davy_gray dark:text-silver_gray-500 transition-colors duration-200;
   }
 
   /* Horizontal Rules */
   .prose hr {
-    @apply my-8 border-t border-platinum/40;
+    @apply my-8 border-t border-platinum/40 dark:border-slate_border transition-colors duration-200;
   }
 
   /* Images */
@@ -131,7 +131,7 @@
 
   /* Strong/Bold */
   .prose strong {
-    @apply font-semibold text-payne_gray;
+    @apply font-semibold text-payne_gray dark:text-silver_gray transition-colors duration-200;
   }
 
   /* Emphasis/Italic */

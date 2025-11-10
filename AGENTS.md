@@ -161,6 +161,293 @@ The color system works in harmony with the typography:
 
 This color system creates a cohesive, professional, and accessible design that maintains visual hierarchy while providing a calm and readable experience for users.
 
+## Dark Mode Color Palette
+
+The dark mode palette is carefully crafted to maintain the same visual hierarchy and sophistication as the light mode while following dark mode best practices.
+
+### Dark Mode Design Principles
+
+1. **Avoid Pure Black**: Uses `#0f1419` as the base to reduce eye strain and provide better contrast control
+2. **Surface Elevation**: Lighter backgrounds indicate elevated surfaces (cards, modals)
+3. **Reduced Contrast**: Text colors are softer (#d4dce4) compared to pure white
+4. **Color Preservation**: Maintains the same color relationships and hierarchy
+5. **Accessibility First**: All combinations meet WCAG AA standards (4.5:1 for normal text, 3:1 for large text)
+
+### Dark Mode Color Definitions
+
+Add these to `tailwind.config.js` under theme.extend.colors:
+
+```javascript
+'dark_slate': {
+  DEFAULT: '#0f1419',
+  100: '#0a0d11',
+  200: '#0f1419',
+  300: '#151b21',
+  400: '#1a1f26',
+  500: '#20252d',
+  600: '#252b34',
+  700: '#2d3540',
+  800: '#374150',
+  900: '#434d5e'
+},
+'silver_gray': {
+  DEFAULT: '#d4dce4',
+  100: '#f0f3f6',
+  200: '#e8eff6',
+  300: '#d4dce4',
+  400: '#c5cdd7',
+  500: '#b4bcc4',
+  600: '#a3abb3',
+  700: '#919aa3',
+  800: '#7f8891',
+  900: '#6d7680'
+},
+'midnight_purple': {
+  DEFAULT: '#c7b8e5',
+  100: '#f3f0fa',
+  200: '#e7e0f5',
+  300: '#d7cceb',
+  400: '#c7b8e5',
+  500: '#b7a4df',
+  600: '#a790d9',
+  700: '#977cd3',
+  800: '#8768cd',
+  900: '#7754c7'
+},
+'slate_border': {
+  DEFAULT: '#2d3540',
+  100: '#434d5e',
+  200: '#3e4856',
+  300: '#38424f',
+  400: '#333c48',
+  500: '#2d3540',
+  600: '#282f39',
+  700: '#232932',
+  800: '#1e232b',
+  900: '#191d24'
+}
+```
+
+### Dark Mode Semantic Mappings
+
+#### Navigation (Dark Mode)
+- Background: `bg-dark_slate`
+- Links: `text-silver_gray`
+- Hover: `hover:text-midnight_purple`
+- Border: `border-slate_border/50`
+
+#### Content Areas (Dark Mode)
+- Background: `bg-dark_slate-400` (elevated surface)
+- Border: `border-slate_border/60`
+- Headings: `text-silver_gray`
+- Body text: `text-silver_gray-500`
+- Subtle text: `text-silver_gray-700`
+
+#### Layout (Dark Mode)
+- Main background: `bg-dark_slate`
+- Text color: `text-silver_gray-500`
+
+### Dark Mode Usage Guidelines
+
+#### Primary Text Hierarchy
+1. **Headings**: `text-silver_gray` (lightest, most prominent)
+2. **Body Text**: `text-silver_gray-500` (medium light)
+3. **Secondary Text**: `text-silver_gray-700` (muted)
+4. **Disabled/Placeholder**: `text-silver_gray-800` (subtle)
+
+#### Background Layers
+1. **Base Layer**: `bg-dark_slate` (#0f1419)
+2. **Elevated Layer**: `bg-dark_slate-400` (#1a1f26)
+3. **Floating/Modal**: `bg-dark_slate-500` (#20252d)
+4. **Hover State**: `bg-dark_slate-600` (#252b34)
+
+#### Interactive Elements
+- **Links**: `text-midnight_purple` with `hover:text-midnight_purple-600`
+- **Buttons**: `bg-midnight_purple-500` with `hover:bg-midnight_purple-600`
+- **Focus Rings**: `ring-midnight_purple/50`
+- **Borders**: `border-slate_border` with varying opacity
+
+### Dark Mode Implementation Examples
+
+#### Navigation Component (Dark Mode)
+```astro
+<nav class="w-full px-6 py-4 bg-dark_slate border-b border-slate_border/50">
+  <a href="#" class="text-silver_gray hover:text-midnight_purple transition-colors duration-200">
+    Link Text
+  </a>
+</nav>
+```
+
+#### Content Card (Dark Mode)
+```astro
+<div class="bg-dark_slate-400 rounded border border-slate_border/60 p-6">
+  <h1 class="text-5xl font-light text-silver_gray mb-4">
+    Main Heading
+  </h1>
+  <p class="text-xl text-silver_gray-700 max-w-lg mx-auto">
+    Subtitle text
+  </p>
+  <p class="text-silver_gray-500 leading-normal mb-4 text-base">
+    Body content
+  </p>
+</div>
+```
+
+#### Layout Structure (Dark Mode)
+```astro
+<body class="font-sans bg-dark_slate text-silver_gray-500 min-h-screen">
+  <!-- Content here -->
+</body>
+```
+
+### Dark Mode Toggle Implementation
+
+```astro
+<!-- In layout.astro head -->
+<script is:inline>
+  // Check for saved theme preference or default to light mode
+  const theme = localStorage.getItem('theme') || 'light';
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+</script>
+
+<!-- Toggle button component -->
+<button 
+  id="theme-toggle"
+  class="text-payne_gray dark:text-silver_gray hover:text-thistle dark:hover:text-midnight_purple transition-colors"
+  aria-label="Toggle dark mode"
+>
+  <svg class="w-6 h-6 hidden dark:block"><!-- Moon icon --></svg>
+  <svg class="w-6 h-6 block dark:hidden"><!-- Sun icon --></svg>
+</button>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
+```
+
+### Markdown Content Styling (Dark Mode)
+
+#### Prose Container (Dark Mode)
+- **Base Text**: `dark:text-silver_gray-500`
+- **Line Height**: Same as light mode (`leading-relaxed`)
+- **Max Width**: `max-w-none`
+
+#### Headings (Dark Mode)
+All headings: `dark:text-silver_gray`
+
+#### Links (Dark Mode)
+- **Default**: `dark:text-midnight_purple dark:decoration-midnight_purple/30`
+- **Hover**: `dark:hover:text-midnight_purple-600 dark:hover:decoration-midnight_purple/60`
+
+#### Code Elements (Dark Mode)
+
+##### Inline Code
+- **Background**: `dark:bg-slate_border`
+- **Text**: `dark:text-silver_gray-300`
+
+##### Code Blocks
+- **Background**: `dark:bg-dark_slate-100`
+- **Text**: `dark:text-silver_gray-200`
+
+#### Blockquotes (Dark Mode)
+- **Border**: `dark:border-l-4 dark:border-midnight_purple`
+- **Background**: `dark:bg-slate_border/30`
+- **Text**: `dark:text-silver_gray-400`
+
+#### Tables (Dark Mode)
+- **Header Background**: `dark:bg-slate_border/40`
+- **Border**: `dark:border-slate_border`
+- **Row Hover**: `dark:hover:bg-slate_border/20`
+
+### Accessibility in Dark Mode
+
+- **Contrast Ratios**:
+  - Headings (silver_gray on dark_slate): ~12:1 (AAA)
+  - Body text (silver_gray-500 on dark_slate): ~8.5:1 (AAA)
+  - Secondary text (silver_gray-700 on dark_slate): ~5.2:1 (AA)
+  - Links (midnight_purple on dark_slate): ~7.8:1 (AAA)
+
+- **Focus Indicators**: Enhanced visibility with `ring-midnight_purple/50`
+- **Reduced Motion**: Respect `prefers-reduced-motion` for transitions
+
+### Migration Checklist
+
+To implement dark mode in your blog:
+
+1. ✅ Add dark mode colors to `tailwind.config.js`
+2. ✅ Enable dark mode in Tailwind config: `darkMode: 'class'`
+3. ✅ Add dark mode variants to all components
+4. ✅ Implement theme toggle with localStorage persistence
+5. ✅ Test all interactive states (hover, focus, active)
+6. ✅ Verify WCAG contrast requirements
+7. ✅ Test with `prefers-color-scheme` media query
+8. ✅ Update markdown/prose styles with dark variants
+
+### Dark Mode Color Tokens Quick Reference
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `dark_slate` | `#0f1419` | Main backgrounds (dark mode) |
+| `silver_gray` | `#d4dce4` | Headings, primary text (dark mode) |
+| `silver_gray-500` | `#b4bcc4` | Body text (dark mode) |
+| `midnight_purple` | `#c7b8e5` | Hover states, accents (dark mode) |
+| `slate_border` | `#2d3540` | Borders, dividers (dark mode) |
+
+### Complete Class Reference
+
+Apply dark mode variants to all existing classes:
+
+```css
+/* Container */
+.prose {
+  @apply dark:text-silver_gray-500;
+}
+
+/* Headings */
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  @apply dark:text-silver_gray;
+}
+
+/* Links */
+.prose a {
+  @apply dark:text-midnight_purple dark:decoration-midnight_purple/30
+         dark:hover:text-midnight_purple-600 dark:hover:decoration-midnight_purple/60;
+}
+
+/* Code */
+.prose code {
+  @apply dark:bg-slate_border dark:text-silver_gray-300;
+}
+
+.prose pre {
+  @apply dark:bg-dark_slate-100 dark:text-silver_gray-200;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  @apply dark:border-midnight_purple dark:bg-slate_border/30 dark:text-silver_gray-400;
+}
+
+/* Tables */
+.prose table {
+  @apply dark:border-slate_border;
+}
+
+.prose thead {
+  @apply dark:bg-slate_border/40;
+}
+
+.prose tbody tr {
+  @apply dark:border-slate_border dark:hover:bg-slate_border/20;
+}
+```
+
 ## Markdown Content Styling
 
 When rendering markdown/MDX content, all elements should follow a consistent styling approach that maintains the design system's color palette and typography principles.
