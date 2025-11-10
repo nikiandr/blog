@@ -22,16 +22,7 @@
 <script>
   function initThemeToggle() {
     const toggle = document.getElementById('theme-toggle');
-
     if (!toggle) return;
-    
-    // Check localStorage and sync theme on initialization
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
     
     toggle.addEventListener('click', () => {
       const isDark = document.documentElement.classList.toggle('dark');
