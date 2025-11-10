@@ -8,7 +8,7 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
     integrations: [tailwind(), mdx()],
     redirects: {
-      "/": { status: 302, destination: "/about-me" },
+      "/": { status: 301, destination: "/about-me" },
     },
     prefetch: true,
 });
