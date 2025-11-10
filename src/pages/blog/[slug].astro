@@ -19,19 +19,17 @@ const title = `${post.data.title} | nfordui`;
 
 <Layout title={title}>
   <div class="mb-12">
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-5xl font-light text-payne_gray leading-snug">
-        {post.data.title}
-      </h1>
-      <p class="text-sm text-davy_gray/80 ml-4 flex-shrink-0">
-        {post.data.pubDate.toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric' 
-        })}
-      </p>
-    </div>
-    <p class="text-xl text-davy_gray/80 max-w-lg leading-normal">
+    <p class="text-sm text-davy_gray/80 mb-3">
+      {post.data.pubDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      })}
+    </p>
+    <h1 class="text-5xl font-light text-payne_gray leading-tight mb-4">
+      {post.data.title}
+    </h1>
+    <p class="text-xl text-davy_gray/80 leading-normal">
       {post.data.description}
     </p>
   </div>

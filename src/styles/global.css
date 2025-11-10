@@ -41,11 +41,11 @@
 
   /* Links */
   .prose a {
-    @apply text-thistle underline decoration-thistle/30 transition-colors duration-200;
+    @apply text-davy_gray no-underline transition-colors duration-200;
   }
 
   .prose a:hover {
-    @apply text-thistle-600 decoration-thistle/60;
+    @apply text-thistle;
   }
 
   .prose a:focus {
@@ -54,11 +54,11 @@
 
   /* Lists */
   .prose ul {
-    @apply mb-4 ml-6 list-disc;
+    @apply mb-4 ml-6 list-none;
   }
 
   .prose ol {
-    @apply mb-4 ml-6 list-decimal;
+    @apply mb-4 ml-6 list-none;
   }
 
   .prose li {
