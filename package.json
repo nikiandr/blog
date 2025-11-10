@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fontsource/inter-tight": "^5.2.7",
-    "astro": "^5.13.7"
+    "astro": "^5.15.4"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
