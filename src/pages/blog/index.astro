@@ -4,7 +4,7 @@ import Content from "../../components/content.astro";
 import Layout from "../../layouts/layout.astro";
 
 const title = "Blog | nfordui";
-const allBlogPosts = await getCollection('blog');
+const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
 ---
 <Layout title={title}>
   <div class="text-center mb-12">
@@ -15,7 +15,7 @@ const allBlogPosts = await getCollection('blog');
 
   <Content>
     {allBlogPosts.length === 0 ? (
-      <p>No blog posts yet. Check back soon!</p>
+      <p>No blog posts yet.</p>
     ) : (
       <ul class="space-y-6">
         {allBlogPosts.map((post) => (
