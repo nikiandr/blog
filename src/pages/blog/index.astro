@@ -17,25 +17,35 @@ const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
     {allBlogPosts.length === 0 ? (
       <p>No blog posts yet.</p>
     ) : (
-      <ul class="space-y-6">
-        {allBlogPosts.map((post) => (
-          <li>
+      <ul class="space-y-0 list-none">
+        {allBlogPosts.map((post, index) => (
+          <li class="group">
             <a 
               href={`/blog/${post.id}`}
-              class="block hover:text-thistle transition-colors duration-200"
+              class="block -mx-4 px-4 py-6 rounded-lg hover:bg-platinum/10 dark:hover:bg-slate_border/20 transition-all duration-200"
             >
-              <div class="flex justify-between items-start mb-2">
-                <h2 class="text-xl font-semibold text-payne_gray">{post.data.title}</h2>
-                <p class="text-sm text-davy_gray/80 ml-4 flex-shrink-0">
+              <div class="mb-3">
+                <h2 class="text-xl font-light text-payne_gray dark:text-silver_gray group-hover:text-thistle dark:group-hover:text-midnight_purple transition-colors duration-200 leading-tight mb-1">
+                  {post.data.title}
+                </h2>
+                <time 
+                  datetime={post.data.pubDate.toISOString()}
+                  class="text-sm text-davy_gray/60 dark:text-silver_gray-700 block"
+                >
                   {post.data.pubDate.toLocaleDateString('en-US', { 
                     year: 'numeric', 
-                    month: 'long', 
+                    month: 'short', 
                     day: 'numeric' 
                   })}
-                </p>
+                </time>
               </div>
-              <p class="text-davy_gray">{post.data.description}</p>
+              <p class="text-base text-davy_gray dark:text-silver_gray-500 leading-relaxed">
+                {post.data.description}
+              </p>
             </a>
+            {index < allBlogPosts.length - 1 && (
+              <hr class="border-t border-platinum/30 dark:border-slate_border/40" />
+            )}
           </li>
         ))}
       </ul>

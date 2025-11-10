@@ -142,12 +142,14 @@ The color system works in harmony with the typography:
 
 ## Best Practices for AI Tools
 
-1. **Consistency**: Always use the predefined color names from the palette
-2. **Hierarchy**: Maintain the established color hierarchy (payne_gray > davy_gray > davy_gray/80)
-3. **Interactions**: Use `thistle` for hover states and interactive elements
-4. **Backgrounds**: Stick to `alice_blue` for main backgrounds and `white/50` for content areas
-5. **Borders**: Use `platinum` with appropriate opacity for all border elements
-6. **Transitions**: Include `transition-colors duration-200` for smooth color changes
+1. **Dark Mode First**: ALWAYS include dark mode color variants when styling ANY component or element. Every color class must have a corresponding `dark:` variant. This is non-negotiable.
+2. **Consistency**: Always use the predefined color names from the palette
+3. **Hierarchy**: Maintain the established color hierarchy (payne_gray > davy_gray > davy_gray/80 in light mode; silver_gray > silver_gray-500 > silver_gray-700 in dark mode)
+4. **Interactions**: Use `thistle` for hover states and interactive elements in light mode, `midnight_purple` in dark mode
+5. **Backgrounds**: Stick to `alice_blue` for main backgrounds and `white/50` for content areas in light mode; `dark_slate` and `dark_slate-400` in dark mode
+6. **Borders**: Use `platinum` with appropriate opacity for all border elements in light mode; `slate_border` in dark mode
+7. **Transitions**: Include `transition-colors duration-200` for smooth color changes
+8. **Complete Coverage**: Every text color, background color, border color, and hover state MUST have both light and dark mode variants
 
 ## Color Tokens Quick Reference
 
@@ -162,6 +164,8 @@ The color system works in harmony with the typography:
 This color system creates a cohesive, professional, and accessible design that maintains visual hierarchy while providing a calm and readable experience for users.
 
 ## Dark Mode Color Palette
+
+**CRITICAL REQUIREMENT**: Dark mode support is MANDATORY for all styling work. When creating or modifying ANY component, you MUST include dark mode variants for ALL color-related classes. There are no exceptions to this rule.
 
 The dark mode palette is carefully crafted to maintain the same visual hierarchy and sophistication as the light mode while following dark mode best practices.
 
@@ -388,6 +392,42 @@ To implement dark mode in your blog:
 6. ✅ Verify WCAG contrast requirements
 7. ✅ Test with `prefers-color-scheme` media query
 8. ✅ Update markdown/prose styles with dark variants
+
+### Styling Checklist for Every Component
+
+When styling ANY component or element, ensure you include:
+
+- [ ] Text colors have `dark:` variants (e.g., `text-payne_gray dark:text-silver_gray`)
+- [ ] Background colors have `dark:` variants (e.g., `bg-white/50 dark:bg-dark_slate-400`)
+- [ ] Border colors have `dark:` variants (e.g., `border-platinum/40 dark:border-slate_border/60`)
+- [ ] Hover states have `dark:` variants (e.g., `hover:text-thistle dark:hover:text-midnight_purple`)
+- [ ] Focus states have `dark:` variants (e.g., `focus:ring-thistle/50 dark:focus:ring-midnight_purple/50`)
+- [ ] Shadow values consider dark mode (e.g., `shadow-sm dark:shadow-slate_border/20`)
+
+**Example of CORRECT styling (always do this):**
+```astro
+<div class="bg-white/50 dark:bg-dark_slate-400 border border-platinum/40 dark:border-slate_border/60 p-6 rounded-lg">
+  <h2 class="text-payne_gray dark:text-silver_gray hover:text-thistle dark:hover:text-midnight_purple">
+    Heading Text
+  </h2>
+  <p class="text-davy_gray dark:text-silver_gray-500">
+    Body text
+  </p>
+</div>
+```
+
+**Example of INCORRECT styling (never do this):**
+```astro
+<!-- WRONG: Missing dark mode variants -->
+<div class="bg-white/50 border border-platinum/40 p-6 rounded-lg">
+  <h2 class="text-payne_gray hover:text-thistle">
+    Heading Text
+  </h2>
+  <p class="text-davy_gray">
+    Body text
+  </p>
+</div>
+```
 
 ### Dark Mode Color Tokens Quick Reference
 
