@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import Content from "../../components/content.astro";
 import Layout from "../../layouts/layout.astro";
 
 const title = "Blog | nfordui";
+const allBlogPosts = await getCollection('blog');
 ---
 <Layout title={title}>
   <div class="text-center mb-12">
@@ -12,8 +14,31 @@ const title = "Blog | nfordui";
   </div>
 
   <Content>
-    <p>
-      To be done
-    </p>
+    {allBlogPosts.length === 0 ? (
+      <p>No blog posts yet. Check back soon!</p>
+    ) : (
+      <ul class="space-y-6">
+        {allBlogPosts.map((post) => (
+          <li>
+            <a 
+              href={`/blog/${post.id}`}
+              class="block hover:text-thistle transition-colors duration-200"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h2 class="text-xl font-semibold text-payne_gray">{post.data.title}</h2>
+                <p class="text-sm text-davy_gray/80 ml-4 flex-shrink-0">
+                  {post.data.pubDate.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </p>
+              </div>
+              <p class="text-davy_gray">{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </Content>
 </Layout>
