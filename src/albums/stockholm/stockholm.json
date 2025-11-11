@@ -1,0 +1,66 @@
+{
+  "title": "Stockholm Trip",
+  "description": "Stockholm Kendrick Lamar concert trip photo dump",
+  "pubDate": "2025-11-11",
+  "draft": false,
+  "tripDates": ["2025-08-08", "2025-08-12"],
+  "photosFolder": "stockholm",
+  "photos": [
+    {
+      "photo": "IMG_0396.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0437.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0499.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0500.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0509.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0560.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0574.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0585.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0591.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0620.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0641.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0695.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0715.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_0744.jpg",
+      "description": ""
+    }
+  ]
+}

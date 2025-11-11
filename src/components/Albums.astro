@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import List from "./List.astro";
+import ListItem from "./ListItem.astro";
+
+const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
+console.log(allAlbums);
+
+const sortedAlbums = allAlbums.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+{sortedAlbums.length === 0 ? (
+  <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+    No albums available yet.
+  </p>
+) : (
+  <List>
+    {sortedAlbums.map((album, index) => {
+      const coverPhoto = album.data.photos[0];
+
+      return (
+        <ListItem
+          href={`/photos/${album.id}`}
+          date={album.data.pubDate}
+          title={album.data.title}
+          description={album.data.description}
+          image={coverPhoto.photo}
+          imageAlt={album.data.title}
+          showDivider={index < sortedAlbums.length - 1}
+        />
+      );
+    })}
+  </List>
+)}
