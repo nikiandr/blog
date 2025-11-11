@@ -4,7 +4,6 @@ import List from "./List.astro";
 import ListItem from "./ListItem.astro";
 
 const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
-console.log(allAlbums);
 
 const sortedAlbums = allAlbums.sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
