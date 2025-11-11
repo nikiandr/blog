@@ -12,14 +12,22 @@
     <title>{title}</title>
 
     <script is:inline>
-      const theme = localStorage.getItem("theme") || "light";
-      if (theme === "dark") {
+      const theme = localStorage.getItem("theme") || "system";
+      
+      function shouldUseDarkMode(themeValue) {
+        if (themeValue === "dark") return true;
+        if (themeValue === "light") return false;
+        // system theme - check OS preference
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+      
+      if (shouldUseDarkMode(theme)) {
         document.documentElement.classList.add("dark");
       }
 
       document.addEventListener("astro:before-swap", (e) => {
-        const savedTheme = localStorage.getItem("theme") || "light";
-        if (savedTheme === "dark") {
+        const savedTheme = localStorage.getItem("theme") || "system";
+        if (shouldUseDarkMode(savedTheme)) {
           e.newDocument.documentElement.classList.add("dark");
         } else {
           e.newDocument.documentElement.classList.remove("dark");
@@ -51,7 +59,7 @@
     <ClientRouter/>
   </head>
   <body
-    class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-200"
+    class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-300"
   >
     <Topbar/>
     <main class="max-w-5xl mx-auto px-6 py-12">
