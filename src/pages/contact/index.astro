@@ -1,18 +1,20 @@
 ---
-import ContactMe from "../../components/contact-me.astro";
-import Content from "../../components/content.astro";
-import Layout from "../../layouts/layout.astro";
+  import ContactMe from "../../components/contact-me.astro";
+  import Content from "../../components/content.astro";
+  import Layout from "../../layouts/layout.astro";
 
-const title = "Contact me | nfordui";
+  const title = "Contact me | nfordui";
 ---
 <Layout title={title}>
   <div class="mb-10">
-    <h1 class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-200">
+    <h1
+      class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-200"
+    >
       Contact me
     </h1>
   </div>
 
   <Content>
-    <ContactMe />
+    <ContactMe/>
   </Content>
 </Layout>

@@ -1,28 +1,28 @@
 ---
-import "@fontsource/inter-tight";
-import { ClientRouter } from "astro:transitions";
-import Topbar from "../components/topbar.astro";
-import "../styles/global.css";
-const {title} = Astro.props;
+  import "@fontsource/inter-tight";
+  import { ClientRouter } from "astro:transitions";
+  import Topbar from "../components/topbar.astro";
+  import "../styles/global.css";
+  const { title } = Astro.props;
 ---
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    
+
     <script is:inline>
-      const theme = localStorage.getItem('theme') || 'light';
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
+      const theme = localStorage.getItem("theme") || "light";
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
       }
-      
-      document.addEventListener('astro:before-swap', (e) => {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-          e.newDocument.documentElement.classList.add('dark');
+
+      document.addEventListener("astro:before-swap", (e) => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        if (savedTheme === "dark") {
+          e.newDocument.documentElement.classList.add("dark");
         } else {
-          e.newDocument.documentElement.classList.remove('dark');
+          e.newDocument.documentElement.classList.remove("dark");
         }
       });
     </script>
@@ -35,7 +35,12 @@ const {title} = Astro.props;
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-icon-192x192.png"
+    >
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -43,12 +48,14 @@ const {title} = Astro.props;
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <ClientRouter />
+    <ClientRouter/>
   </head>
-  <body class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-200">
-    <Topbar />
+  <body
+    class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-200"
+  >
+    <Topbar/>
     <main class="max-w-5xl mx-auto px-6 py-12">
-      <slot />
+      <slot/>
     </main>
   </body>
 </html>
