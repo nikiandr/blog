@@ -15,7 +15,7 @@ const blog = defineCollection({
 
 const albums = defineCollection({
   loader: glob({
-    pattern: "**/*.json",
+    pattern: "**/album.json",
     base: "./src/albums",
   }),
   schema: ({ image }) =>
@@ -25,7 +25,7 @@ const albums = defineCollection({
       pubDate: z.coerce.date(),
       draft: z.boolean().optional(),
       tripDates: z.array(z.coerce.date()).length(2),
-      photosFolder: z.string(),
+      coverPhoto: image(),
       photos: z.array(
         z.object({
           photo: image(),

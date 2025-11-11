@@ -18,15 +18,13 @@ const sortedAlbums = allAlbums.sort(
 ) : (
   <List>
     {sortedAlbums.map((album, index) => {
-      const coverPhoto = album.data.photos[0];
-
       return (
         <ListItem
-          href={`/photos/${album.id}`}
+          href={`/photos/${album.id.split("/")[0]}`}
           date={album.data.pubDate}
           title={album.data.title}
           description={album.data.description}
-          image={coverPhoto.photo}
+          image={album.data.coverPhoto}
           imageAlt={album.data.title}
           showDivider={index < sortedAlbums.length - 1}
         />

@@ -28,8 +28,6 @@ const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
             date={post.data.pubDate}
             title={post.data.title}
             description={post.data.description}
-            image={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog-assets.busbud.com%2Fwp-content%2Fuploads%2F2019%2F11%2FSunnylvsfjorden-fjord-canyon.png&f=1&nofb=1&ipt=d227d5e9690edc53204dea108f6310d71a59e90b026f81f30e7bcfb226cc44e5&impw=1600&imph=900"}
-            imageAlt={"Sunny day in the fjord"}
             showDivider={index < allBlogPosts.length - 1}
           />
         ))}
