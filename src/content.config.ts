@@ -7,7 +7,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    draft: z.boolean().optional(), // Optional draft field
+    draft: z.boolean().optional(),
   }),
 });
 
