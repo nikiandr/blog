@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Markdown/Prose Content Styling */
 
 @layer components {
@@ -12,14 +19,17 @@
   /* Headings */
   .prose h1 {
     @apply text-4xl font-light text-payne_gray dark:text-silver_gray mb-6 mt-8 leading-tight first:mt-0 transition-colors duration-300;
+    scroll-margin-top: 2rem;
   }
 
   .prose h2 {
     @apply text-3xl font-light text-payne_gray dark:text-silver_gray mb-5 mt-7 leading-tight first:mt-0 transition-colors duration-300;
+    scroll-margin-top: 2rem;
   }
 
   .prose h3 {
     @apply text-2xl font-normal text-payne_gray dark:text-silver_gray mb-4 mt-6 leading-snug first:mt-0 transition-colors duration-300;
+    scroll-margin-top: 2rem;
   }
 
   .prose h4 {

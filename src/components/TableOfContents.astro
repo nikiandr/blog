@@ -1,0 +1,94 @@
+---
+interface Heading {
+  depth: number;
+  text: string;
+  slug: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to show H1, H2, and H3 headings
+const filteredHeadings = headings.filter(h => h.depth >= 1 && h.depth <= 3);
+---
+
+{filteredHeadings.length > 0 && (
+  <aside class="sticky top-6">
+    <nav class="w-64">
+      <p class="text-sm font-semibold text-payne_gray dark:text-silver_gray mb-4 transition-colors duration-300">
+        On this page
+      </p>
+      <ul class="space-y-2 text-sm border-l border-platinum/40 dark:border-slate_border/60 transition-colors duration-300">
+        {filteredHeadings.map((heading) => {
+          const paddingClass = heading.depth === 1 ? 'pl-3' : heading.depth === 2 ? 'pl-5' : 'pl-7';
+          return (
+            <li class={paddingClass}>
+              <a
+                href={`#${heading.slug}`}
+                class="block py-1 text-davy_gray dark:text-silver_gray-500 hover:text-thistle dark:hover:text-midnight_purple transition-colors duration-200 leading-snug"
+              >
+                {heading.text}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  </aside>
+)}
+
+<script>
+  // Smooth scroll behavior
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('aside nav a[href^="#"]');
+    
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Update URL without jumping
+            history.pushState(null, '', href);
+          }
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('id');
+          const link = document.querySelector(`aside nav a[href="#${id}"]`);
+          
+          if (entry.isIntersecting) {
+            // Remove active class from all links
+            document.querySelectorAll('aside nav a').forEach((l) => {
+              l.classList.remove('text-thistle', 'dark:text-midnight_purple', 'font-medium');
+              l.classList.add('text-davy_gray', 'dark:text-silver_gray-500');
+            });
+            
+            // Add active class to current link
+            if (link) {
+              link.classList.remove('text-davy_gray', 'dark:text-silver_gray-500');
+              link.classList.add('text-thistle', 'dark:text-midnight_purple', 'font-medium');
+            }
+          }
+        });
+      },
+      { rootMargin: '-100px 0px -66%' }
+    );
+
+    // Observe all headings
+    document.querySelectorAll('h1[id], h2[id], h3[id]').forEach((heading) => {
+      observer.observe(heading);
+    });
+  });
+</script>
+
