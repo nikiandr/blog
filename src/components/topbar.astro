@@ -21,16 +21,19 @@
   ];
 ---
 <nav
-  class="w-full px-6 py-4 bg-alice_blue dark:bg-dark_slate border-b border-platinum/30 dark:border-slate_border/50 transition-colors duration-200"
+  class="w-full px-8 py-4 bg-alice_blue dark:bg-dark_slate border-b border-platinum/30 dark:border-slate_border/50 transition-colors duration-200"
 >
-  <div class="max-w-6xl mx-auto flex justify-between items-center">
-    <div class="flex space-x-12">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href="/" class="text-payne_gray dark:text-silver_gray hover:text-thistle dark:hover:text-midnight_purple transition-colors duration-200 font-medium text-lg">
+      Nikita Fordui
+    </a>
+    <div class="flex items-center space-x-8">
       {elements.map((element) => (
             <a href={element.href} data-astro-prefetch class="text-payne_gray dark:text-silver_gray hover:text-thistle dark:hover:text-midnight_purple transition-colors duration-200 font-normal text-base">
               {element.label}
             </a>
           ))}
+      <ThemeToggle/>
     </div>
-    <ThemeToggle/>
   </div>
 </nav>
