@@ -88,7 +88,7 @@
 
   function updateActiveButton(theme: string) {
     const buttons = document.querySelectorAll(".theme-btn");
-    buttons.forEach((btn) => {
+    for (const btn of buttons) {
       const button = btn as HTMLButtonElement;
       const buttonTheme = button.dataset.theme;
       if (buttonTheme === theme) {
@@ -118,7 +118,7 @@
           "dark:hover:text-midnight_purple"
         );
       }
-    });
+    }
   }
 
   function initThemeToggle() {
@@ -128,7 +128,7 @@
     applyTheme(savedTheme);
     updateActiveButton(savedTheme);
 
-    buttons.forEach((btn) => {
+    for (const btn of buttons) {
       btn.addEventListener("click", () => {
         const button = btn as HTMLButtonElement;
         const theme = button.dataset.theme || "system";
@@ -136,7 +136,7 @@
         applyTheme(theme);
         updateActiveButton(theme);
       });
-    });
+    }
 
     // Listen for system theme changes when in system mode
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

@@ -1,10 +1,10 @@
 ---
-  import { getCollection } from "astro:content";
-  import Content from "../../components/content.astro";
-  import Layout from "../../layouts/layout.astro";
+import { getCollection } from "astro:content";
+import Content from "../../components/Content.astro";
+import Layout from "../../layouts/layout.astro";
 
-  const title = "Blog | nfordui";
-  const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
+const title = "Blog | Nikita Fordui";
+const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
 ---
 <Layout title={title}>
   <div class="mb-10">

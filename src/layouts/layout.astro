@@ -1,9 +1,9 @@
 ---
-  import "@fontsource/inter-tight";
-  import { ClientRouter } from "astro:transitions";
-  import Topbar from "../components/topbar.astro";
-  import "../styles/global.css";
-  const { title } = Astro.props;
+import "@fontsource/inter-tight";
+import { ClientRouter } from "astro:transitions";
+import Topbar from "../components/TopBar.astro";
+import "../styles/global.css";
+const { title } = Astro.props;
 ---
 <html lang="en">
   <head>
@@ -15,8 +15,12 @@
       const theme = localStorage.getItem("theme") || "system";
       
       function shouldUseDarkMode(themeValue) {
-        if (themeValue === "dark") return true;
-        if (themeValue === "light") return false;
+        if (themeValue === "dark") {
+          return true;
+        }
+        if (themeValue === "light") {
+          return false;
+        }
         // system theme - check OS preference
         return window.matchMedia("(prefers-color-scheme: dark)").matches;
       }
