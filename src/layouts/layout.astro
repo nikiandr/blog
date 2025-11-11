@@ -1,7 +1,7 @@
 ---
 import "@fontsource/inter-tight";
 import { ClientRouter } from "astro:transitions";
-import Topbar from "../components/TopBar.astro";
+import TopBar from "../components/TopBar.astro";
 import "../styles/global.css";
 const { title } = Astro.props;
 ---
@@ -65,7 +65,7 @@ const { title } = Astro.props;
   <body
     class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-300"
   >
-    <Topbar/>
+    <TopBar/>
     <main class="max-w-5xl mx-auto px-6 py-12">
       <slot/>
     </main>
