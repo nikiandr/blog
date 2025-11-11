@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import Content from "../../components/Content.astro";
+import List from "../../components/List.astro";
+import ListItem from "../../components/ListItem.astro";
 import Layout from "../../layouts/layout.astro";
 
 const title = "Blog | Nikita Fordui";
@@ -19,38 +21,19 @@ const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
     {allBlogPosts.length === 0 ? (
       <p class="text-lg text-davy_gray dark:text-silver_gray-500">No blog posts yet.</p>
     ) : (
-      <ul class="space-y-0 list-none">
+      <List>
         {allBlogPosts.map((post, index) => (
-          <li class="group">
-            <a 
-              href={`/blog/${post.id}`}
-              class="block -mx-4 px-4 py-8 rounded-lg hover:bg-platinum/10 dark:hover:bg-slate_border/20 transition-all duration-300"
-            >
-              <div class="mb-3">
-                <time 
-                  datetime={post.data.pubDate.toISOString()}
-                  class="text-xs uppercase tracking-wider text-davy_gray/60 dark:text-silver_gray-700 block mb-3"
-                >
-                  {post.data.pubDate.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'short', 
-                    day: 'numeric' 
-                  })}
-                </time>
-                <h2 class="text-3xl font-light text-payne_gray dark:text-silver_gray group-hover:text-thistle dark:group-hover:text-midnight_purple transition-colors duration-300 leading-tight mb-3">
-                  {post.data.title}
-                </h2>
-              </div>
-              <p class="text-lg text-davy_gray dark:text-silver_gray-500 leading-relaxed">
-                {post.data.description}
-              </p>
-            </a>
-            {index < allBlogPosts.length - 1 && (
-              <hr class="border-t border-platinum/30 dark:border-slate_border/40 my-2" />
-            )}
-          </li>
+          <ListItem
+            href={`/blog/${post.id}`}
+            date={post.data.pubDate}
+            title={post.data.title}
+            description={post.data.description}
+            image={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog-assets.busbud.com%2Fwp-content%2Fuploads%2F2019%2F11%2FSunnylvsfjorden-fjord-canyon.png&f=1&nofb=1&ipt=d227d5e9690edc53204dea108f6310d71a59e90b026f81f30e7bcfb226cc44e5&impw=1600&imph=900"}
+            imageAlt={"Sunny day in the fjord"}
+            showDivider={index < allBlogPosts.length - 1}
+          />
         ))}
-      </ul>
+      </List>
     )}
   </Content>
 </Layout>

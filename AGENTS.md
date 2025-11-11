@@ -1,3 +1,7 @@
+# Codestyle
+
+For components file names use naming with uppercase (e.g. List.astro instead of list.astro)
+
 # Design System Documentation
 
 This document provides a comprehensive guide to the blog's design system, specifically focused on colors and their proper usage. This documentation is intended for AI tools and developers working on the project.
@@ -9,6 +13,7 @@ The design system uses a sophisticated, muted color palette that creates a calm 
 ### Primary Colors
 
 #### Alice Blue (`alice_blue`)
+
 - **Primary Use**: Background color for the main layout
 - **Hex**: `#f4faff` (DEFAULT)
 - Description: A very light, almost white blue that serves as the primary background
@@ -18,6 +23,7 @@ The design system uses a sophisticated, muted color palette that creates a calm 
 - **Shade Scale**: 100 (darkest `#003764`) to 900 (lightest `#fdfeff`)
 
 #### Payne Gray (`payne_gray`)
+
 - **Primary Use**: Primary text color and main headings
 - **Hex**: `#4f646f` (DEFAULT)
 - **Description**: A sophisticated blue-gray that provides excellent readability
@@ -27,6 +33,7 @@ The design system uses a sophisticated, muted color palette that creates a calm 
 - **Shade Scale**: 100 (`#101416`) to 900 (`#d9e1e4`)
 
 #### Davy Gray (`davy_gray`)
+
 - **Primary Use**: Body text and secondary content
 - **Hex**: `#535657` (DEFAULT)
 - **Description**: A neutral gray for body text and secondary elements
@@ -38,6 +45,7 @@ The design system uses a sophisticated, muted color palette that creates a calm 
 ### Secondary/Accent Colors
 
 #### Thistle (`thistle`)
+
 - **Primary Use**: Hover states and subtle accents
 - **Hex**: `#b7adcf` (DEFAULT)
 - **Description**: A soft purple that adds warmth and serves as an accent color
@@ -47,6 +55,7 @@ The design system uses a sophisticated, muted color palette that creates a calm 
 - **Shade Scale**: 100 (`#221c30`) to 900 (`#f1eff6`)
 
 #### Platinum (`platinum`)
+
 - **Primary Use**: Borders and subtle dividers
 - **Hex**: `#dee7e7` (DEFAULT)
 - **Description**: A very light gray-green used for borders and subtle separations
@@ -77,18 +86,21 @@ The design system makes extensive use of opacity to create subtle variations:
 ### Semantic Usage
 
 #### Navigation
+
 - Background: `bg-alice_blue`
 - Links: `text-payne_gray`
 - Hover: `hover:text-thistle`
 - Border: `border-platinum/30`
 
 #### Content Areas
+
 - Background: `bg-white/50` with `border-platinum/40`
 - Headings: `text-payne_gray`
 - Body text: `text-davy_gray`
 - Subtle text: `text-davy_gray/80`
 
 #### Layout
+
 - Main background: `bg-alice_blue`
 - Text color: `text-davy_gray`
 
@@ -103,6 +115,7 @@ The color system works in harmony with the typography:
 ## Implementation Examples
 
 ### Navigation Component
+
 ```astro
 <nav class="w-full px-6 py-4 bg-alice_blue border-b border-platinum/30">
   <a href="#" class="text-payne_gray hover:text-thistle transition-colors duration-200">
@@ -112,6 +125,7 @@ The color system works in harmony with the typography:
 ```
 
 ### Content Card
+
 ```astro
 <div class="bg-white/50 rounded border border-platinum/40 p-6">
   <h1 class="text-5xl font-light text-payne_gray mb-4">
@@ -127,6 +141,7 @@ The color system works in harmony with the typography:
 ```
 
 ### Layout Structure
+
 ```astro
 <body class="font-sans bg-alice_blue text-davy_gray min-h-screen">
   <!-- Content here -->
@@ -153,13 +168,13 @@ The color system works in harmony with the typography:
 
 ## Color Tokens Quick Reference
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `alice_blue` | `#f4faff` | Main backgrounds |
+| Token        | Hex       | Usage                  |
+| ------------ | --------- | ---------------------- |
+| `alice_blue` | `#f4faff` | Main backgrounds       |
 | `payne_gray` | `#4f646f` | Headings, primary text |
-| `davy_gray` | `#535657` | Body text |
-| `thistle` | `#b7adcf` | Hover states, accents |
-| `platinum` | `#dee7e7` | Borders, dividers |
+| `davy_gray`  | `#535657` | Body text              |
+| `thistle`    | `#b7adcf` | Hover states, accents  |
+| `platinum`   | `#dee7e7` | Borders, dividers      |
 
 This color system creates a cohesive, professional, and accessible design that maintains visual hierarchy while providing a calm and readable experience for users.
 
@@ -235,12 +250,14 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 ### Dark Mode Semantic Mappings
 
 #### Navigation (Dark Mode)
+
 - Background: `bg-dark_slate`
 - Links: `text-silver_gray`
 - Hover: `hover:text-midnight_purple`
 - Border: `border-slate_border/50`
 
 #### Content Areas (Dark Mode)
+
 - Background: `bg-dark_slate-400` (elevated surface)
 - Border: `border-slate_border/60`
 - Headings: `text-silver_gray`
@@ -248,24 +265,28 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 - Subtle text: `text-silver_gray-700`
 
 #### Layout (Dark Mode)
+
 - Main background: `bg-dark_slate`
 - Text color: `text-silver_gray-500`
 
 ### Dark Mode Usage Guidelines
 
 #### Primary Text Hierarchy
+
 1. **Headings**: `text-silver_gray` (lightest, most prominent)
 2. **Body Text**: `text-silver_gray-500` (medium light)
 3. **Secondary Text**: `text-silver_gray-700` (muted)
 4. **Disabled/Placeholder**: `text-silver_gray-800` (subtle)
 
 #### Background Layers
+
 1. **Base Layer**: `bg-dark_slate` (#0f1419)
 2. **Elevated Layer**: `bg-dark_slate-400` (#1a1f26)
 3. **Floating/Modal**: `bg-dark_slate-500` (#20252d)
 4. **Hover State**: `bg-dark_slate-600` (#252b34)
 
 #### Interactive Elements
+
 - **Links**: `text-midnight_purple` with `hover:text-midnight_purple-600`
 - **Buttons**: `bg-midnight_purple-500` with `hover:bg-midnight_purple-600`
 - **Focus Rings**: `ring-midnight_purple/50`
@@ -274,6 +295,7 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 ### Dark Mode Implementation Examples
 
 #### Navigation Component (Dark Mode)
+
 ```astro
 <nav class="w-full px-6 py-4 bg-dark_slate border-b border-slate_border/50">
   <a href="#" class="text-silver_gray hover:text-midnight_purple transition-colors duration-200">
@@ -283,6 +305,7 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 ```
 
 #### Content Card (Dark Mode)
+
 ```astro
 <div class="bg-dark_slate-400 rounded border border-slate_border/60 p-6">
   <h1 class="text-5xl font-light text-silver_gray mb-4">
@@ -298,6 +321,7 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 ```
 
 #### Layout Structure (Dark Mode)
+
 ```astro
 <body class="font-sans bg-dark_slate text-silver_gray-500 min-h-screen">
   <!-- Content here -->
@@ -317,7 +341,7 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 </script>
 
 <!-- Toggle button component -->
-<button 
+<button
   id="theme-toggle"
   class="text-payne_gray dark:text-silver_gray hover:text-thistle dark:hover:text-midnight_purple transition-colors"
   aria-label="Toggle dark mode"
@@ -338,33 +362,40 @@ Add these to `tailwind.config.js` under theme.extend.colors:
 ### Markdown Content Styling (Dark Mode)
 
 #### Prose Container (Dark Mode)
+
 - **Base Text**: `dark:text-silver_gray-500`
 - **Line Height**: Same as light mode (`leading-relaxed`)
 - **Max Width**: `max-w-none`
 
 #### Headings (Dark Mode)
+
 All headings: `dark:text-silver_gray`
 
 #### Links (Dark Mode)
+
 - **Default**: `dark:text-midnight_purple dark:decoration-midnight_purple/30`
 - **Hover**: `dark:hover:text-midnight_purple-600 dark:hover:decoration-midnight_purple/60`
 
 #### Code Elements (Dark Mode)
 
 ##### Inline Code
+
 - **Background**: `dark:bg-slate_border`
 - **Text**: `dark:text-silver_gray-300`
 
 ##### Code Blocks
+
 - **Background**: `dark:bg-dark_slate-100`
 - **Text**: `dark:text-silver_gray-200`
 
 #### Blockquotes (Dark Mode)
+
 - **Border**: `dark:border-l-4 dark:border-midnight_purple`
 - **Background**: `dark:bg-slate_border/30`
 - **Text**: `dark:text-silver_gray-400`
 
 #### Tables (Dark Mode)
+
 - **Header Background**: `dark:bg-slate_border/40`
 - **Border**: `dark:border-slate_border`
 - **Row Hover**: `dark:hover:bg-slate_border/20`
@@ -372,6 +403,7 @@ All headings: `dark:text-silver_gray`
 ### Accessibility in Dark Mode
 
 - **Contrast Ratios**:
+
   - Headings (silver_gray on dark_slate): ~12:1 (AAA)
   - Body text (silver_gray-500 on dark_slate): ~8.5:1 (AAA)
   - Secondary text (silver_gray-700 on dark_slate): ~5.2:1 (AA)
@@ -405,6 +437,7 @@ When styling ANY component or element, ensure you include:
 - [ ] Shadow values consider dark mode (e.g., `shadow-sm dark:shadow-slate_border/20`)
 
 **Example of CORRECT styling (always do this):**
+
 ```astro
 <div class="bg-white/50 dark:bg-dark_slate-400 border border-platinum/40 dark:border-slate_border/60 p-6 rounded-lg">
   <h2 class="text-payne_gray dark:text-silver_gray hover:text-thistle dark:hover:text-midnight_purple">
@@ -417,6 +450,7 @@ When styling ANY component or element, ensure you include:
 ```
 
 **Example of INCORRECT styling (never do this):**
+
 ```astro
 <!-- WRONG: Missing dark mode variants -->
 <div class="bg-white/50 border border-platinum/40 p-6 rounded-lg">
@@ -431,13 +465,13 @@ When styling ANY component or element, ensure you include:
 
 ### Dark Mode Color Tokens Quick Reference
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `dark_slate` | `#0f1419` | Main backgrounds (dark mode) |
-| `silver_gray` | `#d4dce4` | Headings, primary text (dark mode) |
-| `silver_gray-500` | `#b4bcc4` | Body text (dark mode) |
-| `midnight_purple` | `#c7b8e5` | Hover states, accents (dark mode) |
-| `slate_border` | `#2d3540` | Borders, dividers (dark mode) |
+| Token             | Hex       | Usage                              |
+| ----------------- | --------- | ---------------------------------- |
+| `dark_slate`      | `#0f1419` | Main backgrounds (dark mode)       |
+| `silver_gray`     | `#d4dce4` | Headings, primary text (dark mode) |
+| `silver_gray-500` | `#b4bcc4` | Body text (dark mode)              |
+| `midnight_purple` | `#c7b8e5` | Hover states, accents (dark mode)  |
+| `slate_border`    | `#2d3540` | Borders, dividers (dark mode)      |
 
 ### Complete Class Reference
 
@@ -450,7 +484,12 @@ Apply dark mode variants to all existing classes:
 }
 
 /* Headings */
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
   @apply dark:text-silver_gray;
 }
 
@@ -532,11 +571,13 @@ All headings use the `payne_gray` color and follow a clear size hierarchy:
 ### Lists
 
 #### Unordered Lists
+
 - **Container**: `mb-4`, `ml-6`, `list-disc`
 - **Nested Lists**: `mt-2`, `ml-6`
 - **List Items**: `mb-2`, `leading-relaxed`, `pl-1`
 
 #### Ordered Lists
+
 - **Container**: `mb-4`, `ml-6`, `list-decimal`
 - **Nested Lists**: `mt-2`, `ml-6`
 - **List Items**: `mb-2`, `leading-relaxed`, `pl-1`
@@ -544,6 +585,7 @@ All headings use the `payne_gray` color and follow a clear size hierarchy:
 ### Code Elements
 
 #### Inline Code
+
 - **Background**: `bg-platinum/20`
 - **Text**: `text-payne_gray-700`
 - **Padding**: `px-1.5 py-0.5`
@@ -552,6 +594,7 @@ All headings use the `payne_gray` color and follow a clear size hierarchy:
 - **Font Family**: Monospace (default)
 
 #### Code Blocks
+
 - **Background**: `bg-payne_gray-900`
 - **Text**: `text-alice_blue-800`
 - **Padding**: `p-4`
@@ -573,27 +616,33 @@ All headings use the `payne_gray` color and follow a clear size hierarchy:
 ### Tables
 
 #### Table Container
+
 - **Margin**: `my-6`
 - **Overflow**: `overflow-x-auto`
 
 #### Table Element
+
 - **Width**: `w-full`
 - **Border Collapse**: `border-collapse`
 - **Text Size**: `text-sm`
 
 #### Table Header
+
 - **Background**: `bg-platinum/20`
 - **Border**: `border-b-2 border-platinum`
 
 #### Table Header Cells
+
 - **Padding**: `px-4 py-3`
 - **Text**: `text-left font-semibold text-payne_gray`
 
 #### Table Body Rows
+
 - **Border**: `border-b border-platinum/40`
 - **Hover**: `hover:bg-platinum/5 transition-colors duration-150`
 
 #### Table Data Cells
+
 - **Padding**: `px-4 py-3`
 - **Text**: `text-davy_gray`
 
@@ -635,17 +684,17 @@ All headings use the `payne_gray` color and follow a clear size hierarchy:
 <div class="prose prose-custom">
   <h1>Main Article Heading</h1>
   <p>Article paragraph with <a href="#">styled links</a> and <code>inline code</code>.</p>
-  
+
   <h2>Subheading</h2>
   <ul>
     <li>List item one</li>
     <li>List item two</li>
   </ul>
-  
+
   <blockquote>
     <p>A meaningful quote that stands out from the content.</p>
   </blockquote>
-  
+
   <pre><code>// Code block example
 const greeting = "Hello, World!";
 console.log(greeting);</code></pre>
