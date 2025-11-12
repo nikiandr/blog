@@ -18,8 +18,8 @@ const { Content: PostContent, headings } = await render(post);
 const title = `${post.data.title} | Nikita Fordui`;
 ---
 <Layout title={title}>
-  <!-- Wrapper that shrinks right margin and extends left margin equally -->
-  <div class="lg:mr-16 lg:ml-16">
+  <!-- Wrapper that shrinks right margin for TOC space -->
+  <div class="lg:mr-16">
     <div class="mb-10">
       <p
         class="text-sm uppercase tracking-wider text-davy_gray/70 dark:text-silver_gray-700 mb-6 transition-colors duration-300"
