@@ -1,0 +1,30 @@
+{
+  "title": "Oslo Trip",
+  "description": "Oslo November trip photo dump",
+  "pubDate": "2025-11-24",
+  "draft": false,
+  "tripDates": ["2025-11-14", "2025-11-17"],
+  "coverPhoto": "IMG_1353.jpg",
+  "photos": [
+    {
+      "photo": "IMG_1319.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_1353.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_1356.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_1403.jpg",
+      "description": ""
+    },
+    {
+      "photo": "IMG_1421.jpg",
+      "description": ""
+    }
+  ]
+}
