@@ -45,7 +45,7 @@ export const Gallery = ({ images, className = "" }: GalleryProps) => {
     <div className={className}>
       {/* Gallery Grid - Dense layout to eliminate gaps */}
       <div
-        className="grid grid-flow-dense auto-rows-[200px] grid-cols-2 gap-2 sm:auto-rows-[250px] sm:grid-cols-3 lg:auto-rows-[280px] lg:grid-cols-4"
+        className="grid grid-flow-dense auto-rows-[250px] grid-cols-1 gap-2 sm:auto-rows-[300px] sm:grid-cols-2 lg:auto-rows-[350px] lg:grid-cols-2"
         id={GALLERY.ID}
       >
         {images.map((image, index) => {

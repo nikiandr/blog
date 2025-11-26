@@ -1,5 +1,5 @@
 ---
-  import { Image } from 'astro:assets';
+  import { Image } from "astro:assets";
 
   // Type for image from collections (returned by image() schema helper)
   type CollectionImage = {
@@ -19,6 +19,7 @@
     imageWidth?: number;
     imageHeight?: number;
     showDivider?: boolean;
+    isActive?: boolean;
     class?: string;
   };
 
@@ -32,13 +33,18 @@
     imageWidth = 1200,
     imageHeight = 675,
     showDivider = false,
+    isActive = false,
     class: className = "",
   } = Astro.props;
 ---
 <li class={`group ${className}`}>
   <a
     href={href}
-    class="block -mx-4 px-4 py-8 rounded-lg hover:bg-platinum/10 dark:hover:bg-slate_border/20 transition-all duration-300"
+    class={`block -mx-4 px-4 py-8 rounded-lg transition-all duration-300 ${
+      isActive
+        ? "bg-thistle/10 dark:bg-midnight_purple/10 border-l-4 border-thistle dark:border-midnight_purple"
+        : "hover:bg-platinum/10 dark:hover:bg-slate_border/20"
+    }`}
   >
     <time
       datetime={date.toISOString()}

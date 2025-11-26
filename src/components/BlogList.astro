@@ -1,0 +1,37 @@
+---
+  import { getCollection } from "astro:content";
+  import List from "./List.astro";
+  import ListItem from "./ListItem.astro";
+
+  type Props = {
+    currentSlug?: string;
+  };
+
+  const { currentSlug } = Astro.props;
+
+  const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
+
+  const sortedPosts = allBlogPosts.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  );
+---
+<div class="p-6">
+  {sortedPosts.length === 0 ? (
+    <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+      No blog posts yet.
+    </p>
+  ) : (
+    <List>
+      {sortedPosts.map((post, index) => (
+        <ListItem
+          href={`/blog/${post.id}`}
+          date={post.data.pubDate}
+          title={post.data.title}
+          description={post.data.description}
+          showDivider={index < sortedPosts.length - 1}
+          isActive={currentSlug === post.id}
+        />
+      ))}
+    </List>
+  )}
+</div>

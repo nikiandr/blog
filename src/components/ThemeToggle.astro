@@ -1,4 +1,6 @@
-<div class="flex items-center gap-1 p-1 bg-white/50 dark:bg-dark_slate-400 border border-platinum/30 dark:border-slate_border/50 rounded-full">
+<div
+  class="flex items-center gap-1 p-1 bg-white/50 dark:bg-dark_slate-400 border border-platinum/30 dark:border-slate_border/50 rounded-full"
+>
   <button
     data-theme="light"
     class="theme-btn p-2 rounded-full transition-all duration-300"
@@ -69,7 +71,7 @@
 <script>
   function applyTheme(theme: string) {
     const html = document.documentElement;
-    
+
     if (theme === "system") {
       const systemPrefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)"

@@ -1,15 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import List from "./List.astro";
-import ListItem from "./ListItem.astro";
+  import { getCollection } from "astro:content";
+  import List from "./List.astro";
+  import ListItem from "./ListItem.astro";
 
-const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
+  const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
 
-const sortedAlbums = allAlbums.sort(
-  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
-);
+  const sortedAlbums = allAlbums.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  );
 ---
-
 {sortedAlbums.length === 0 ? (
   <p class="text-lg text-davy_gray dark:text-silver_gray-500">
     No albums available yet.

@@ -1,39 +1,42 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import Content from "../../components/Content.astro";
-import GalleryWrapper from "../../components/GalleryWrapper.astro";
-import Layout from "../../layouts/layout.astro";
+  import { type CollectionEntry, getCollection } from "astro:content";
+  import AlbumList from "../../components/AlbumList.astro";
+  import Content from "../../components/Content.astro";
+  import GalleryWrapper from "../../components/GalleryWrapper.astro";
+  import Layout from "../../layouts/layout.astro";
 
-export async function getStaticPaths() {
-  const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
+  export async function getStaticPaths() {
+    const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
 
-  return allAlbums.map((albumEntry) => ({
-    params: { album: albumEntry.id.split("/")[0] },
-    props: { album: albumEntry },
-  }));
-}
+    return allAlbums.map((albumEntry) => ({
+      params: { album: albumEntry.id.split("/")[0] },
+      props: { album: albumEntry },
+    }));
+  }
 
-type Props = {
-  album: CollectionEntry<"albums">;
-};
+  type Props = {
+    album: CollectionEntry<"albums">;
+  };
 
-const { album } = Astro.props;
-const { title, description, tripDates, photos } = album.data;
+  const { album } = Astro.props;
+  const { title, description, tripDates, photos } = album.data;
 
-// Format dates
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  // Format dates
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
-const tripStart = formatDate(tripDates[0]);
-const tripEnd = formatDate(tripDates[1]);
+  const tripStart = formatDate(tripDates[0]);
+  const tripEnd = formatDate(tripDates[1]);
 
-const pageTitle = `${title} | Photos | Nikita Fordui`;
+  const pageTitle = `${title} | Photos | Nikita Fordui`;
+  const albumId = album.id.split("/")[0];
 ---
 <Layout title={pageTitle}>
+  <AlbumList slot="list-panel" currentAlbumId={albumId}/>
   <div class="mb-10">
     <h1
       class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300 mb-4"

@@ -9,6 +9,18 @@
   }
 }
 
+@layer utilities {
+  /* Hide scrollbar while maintaining scroll functionality */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 /* Markdown/Prose Content Styling */
 
 @layer components {

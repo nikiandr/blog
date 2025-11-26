@@ -1,11 +1,13 @@
 ---
-import Albums from "../../components/Albums.astro";
-import Content from "../../components/Content.astro";
-import Layout from "../../layouts/layout.astro";
+  import AlbumList from "../../components/AlbumList.astro";
+  import Content from "../../components/Content.astro";
+  import Layout from "../../layouts/layout.astro";
 
-const title = "Photos | Nikita Fordui";
+  const title = "Photos | Nikita Fordui";
 ---
 <Layout title={title}>
+  <AlbumList slot="list-panel"/>
+
   <div class="mb-10">
     <h1
       class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
@@ -15,6 +17,8 @@ const title = "Photos | Nikita Fordui";
   </div>
 
   <Content>
-    <Albums/>
+    <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+      Browse my photo albums. Select an album from the list to view.
+    </p>
   </Content>
 </Layout>

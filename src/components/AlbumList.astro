@@ -1,0 +1,40 @@
+---
+  import { getCollection } from "astro:content";
+  import List from "./List.astro";
+  import ListItem from "./ListItem.astro";
+
+  type Props = {
+    currentAlbumId?: string;
+  };
+
+  const { currentAlbumId } = Astro.props;
+
+  const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
+
+  const sortedAlbums = allAlbums.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  );
+---
+<div class="p-6">
+  {sortedAlbums.length === 0 ? (
+    <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+      No albums available yet.
+    </p>
+  ) : (
+    <List>
+      {sortedAlbums.map((album, index) => {
+        const albumId = album.id.split("/")[0];
+        return (
+          <ListItem
+            href={`/photos/${albumId}`}
+            date={album.data.pubDate}
+            title={album.data.title}
+            description={album.data.description}
+            showDivider={index < sortedAlbums.length - 1}
+            isActive={currentAlbumId === albumId}
+          />
+        );
+      })}
+    </List>
+  )}
+</div>

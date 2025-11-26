@@ -12,4 +12,3 @@ export const GALLERY = {
   },
   SCROLL_THRESHOLD: 300,
 } as const;
-

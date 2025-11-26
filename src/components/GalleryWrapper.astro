@@ -1,22 +1,20 @@
 ---
-import type { ImageMetadata } from "astro";
-import { transformImageToGalleryImage } from "../libs/gallery/transform";
-import { Gallery } from "./react/Gallery";
+  import type { ImageMetadata } from "astro";
+  import { transformImageToGalleryImage } from "../libs/gallery/transform";
+  import { Gallery } from "./react/Gallery";
 
-type Props = {
-  images: { photo: ImageMetadata; description: string }[];
-  class?: string;
-};
+  type Props = {
+    images: { photo: ImageMetadata; description: string }[];
+    class?: string;
+  };
 
-const { images, class: className } = Astro.props;
+  const { images, class: className } = Astro.props;
 
-// Transform all images to gallery format
-const galleryImages = await Promise.all(
-  images.map(async ({ photo, description }) =>
-    transformImageToGalleryImage(photo, description)
-  )
-);
+  // Transform all images to gallery format
+  const galleryImages = await Promise.all(
+    images.map(async ({ photo, description }) =>
+      transformImageToGalleryImage(photo, description)
+    )
+  );
 ---
-
-<Gallery client:only="react" images={galleryImages} className={className} />
-
+<Gallery client:only="react" images={galleryImages} className={className}/>

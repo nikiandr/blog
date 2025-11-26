@@ -1,20 +1,19 @@
 ---
-interface Heading {
-  depth: number;
-  text: string;
-  slug: string;
-}
+  interface Heading {
+    depth: number;
+    text: string;
+    slug: string;
+  }
 
-interface Props {
-  headings: Heading[];
-}
+  interface Props {
+    headings: Heading[];
+  }
 
-const { headings } = Astro.props;
+  const { headings } = Astro.props;
 
-// Filter to show H1, H2, and H3 headings
-const filteredHeadings = headings.filter(h => h.depth >= 1 && h.depth <= 3);
+  // Filter to show H1, H2, and H3 headings
+  const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 ---
-
 {filteredHeadings.length > 0 && (
   <aside class="sticky top-6">
     <nav class="w-64">
@@ -42,19 +41,19 @@ const filteredHeadings = headings.filter(h => h.depth >= 1 && h.depth <= 3);
 
 <script>
   // Smooth scroll behavior
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const links = document.querySelectorAll('aside nav a[href^="#"]');
-    
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
-        const href = link.getAttribute('href');
+        const href = link.getAttribute("href");
         if (href) {
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
             // Update URL without jumping
-            history.pushState(null, '', href);
+            history.pushState(null, "", href);
           }
         }
       });
@@ -64,31 +63,41 @@ const filteredHeadings = headings.filter(h => h.depth >= 1 && h.depth <= 3);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const id = entry.target.getAttribute('id');
+          const id = entry.target.getAttribute("id");
           const link = document.querySelector(`aside nav a[href="#${id}"]`);
-          
+
           if (entry.isIntersecting) {
             // Remove active class from all links
-            document.querySelectorAll('aside nav a').forEach((l) => {
-              l.classList.remove('text-thistle', 'dark:text-midnight_purple', 'font-medium');
-              l.classList.add('text-davy_gray', 'dark:text-silver_gray-500');
+            document.querySelectorAll("aside nav a").forEach((l) => {
+              l.classList.remove(
+                "text-thistle",
+                "dark:text-midnight_purple",
+                "font-medium"
+              );
+              l.classList.add("text-davy_gray", "dark:text-silver_gray-500");
             });
-            
+
             // Add active class to current link
             if (link) {
-              link.classList.remove('text-davy_gray', 'dark:text-silver_gray-500');
-              link.classList.add('text-thistle', 'dark:text-midnight_purple', 'font-medium');
+              link.classList.remove(
+                "text-davy_gray",
+                "dark:text-silver_gray-500"
+              );
+              link.classList.add(
+                "text-thistle",
+                "dark:text-midnight_purple",
+                "font-medium"
+              );
             }
           }
         });
       },
-      { rootMargin: '-100px 0px -66%' }
+      { rootMargin: "-100px 0px -66%" }
     );
 
     // Observe all headings
-    document.querySelectorAll('h1[id], h2[id], h3[id]').forEach((heading) => {
+    document.querySelectorAll("h1[id], h2[id], h3[id]").forEach((heading) => {
       observer.observe(heading);
     });
   });
 </script>
-

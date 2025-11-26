@@ -1,9 +1,11 @@
 ---
-import "@fontsource/stack-sans-headline";
-import { ClientRouter } from "astro:transitions";
-import TopBar from "../components/TopBar.astro";
-import "../styles/global.css";
-const { title } = Astro.props;
+  import "@fontsource/stack-sans-headline";
+  import { ClientRouter } from "astro:transitions";
+  import MobileNav from "../components/MobileNav.astro";
+  import Sidebar from "../components/Sidebar.astro";
+  import "../styles/global.css";
+  const { title } = Astro.props;
+  const hasListPanel = await Astro.slots.has("list-panel");
 ---
 <html lang="en">
   <head>
@@ -13,7 +15,7 @@ const { title } = Astro.props;
 
     <script is:inline>
       const theme = localStorage.getItem("theme") || "system";
-      
+
       function shouldUseDarkMode(themeValue) {
         if (themeValue === "dark") {
           return true;
@@ -24,7 +26,7 @@ const { title } = Astro.props;
         // system theme - check OS preference
         return window.matchMedia("(prefers-color-scheme: dark)").matches;
       }
-      
+
       if (shouldUseDarkMode(theme)) {
         document.documentElement.classList.add("dark");
       }
@@ -65,9 +67,194 @@ const { title } = Astro.props;
   <body
     class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-300"
   >
-    <TopBar/>
-    <main class="max-w-5xl mx-auto px-6 py-12">
-      <slot/>
-    </main>
+    <!-- Desktop three-panel layout -->
+    <div
+      id="desktop-layout"
+      class={`hidden lg:grid lg:h-screen ${
+        hasListPanel ? "has-list lg:grid-cols-[15%_35%_50%]" : "no-list lg:grid-cols-[15%_85%]"
+      }`}
+    >
+      <!-- Left Sidebar -->
+      <aside id="main-sidebar">
+        <Sidebar currentPath={Astro.url.pathname}/>
+      </aside>
+
+      <!-- Middle List Panel (conditional) -->
+      {hasListPanel && (
+        <aside
+          id="list-panel"
+          class="hide-scrollbar overflow-y-auto border-r border-platinum/30 dark:border-slate_border/50 bg-alice_blue dark:bg-dark_slate transition-colors duration-300"
+        >
+          <slot name="list-panel"/>
+        </aside>
+      )}
+
+      <!-- Right Content Panel -->
+      <main
+        class="overflow-y-auto px-6 py-12 bg-alice_blue dark:bg-dark_slate transition-colors duration-300"
+      >
+        <div class="max-w-5xl mx-auto">
+          <slot/>
+        </div>
+      </main>
+    </div>
+
+    <!-- Focus Mode Toggle Button -->
+    <button
+      id="sidebar-toggle"
+      class="fixed bottom-6 right-6 lg:flex hidden z-40 items-center gap-2 px-4 py-3 rounded-full bg-thistle dark:bg-midnight_purple text-white hover:scale-105 transition-all duration-300 shadow-lg"
+      aria-label="Toggle focus mode"
+    >
+      <svg
+        class="w-5 h-5 focus-mode-icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+        />
+      </svg>
+      <span class="focus-mode-text text-sm font-medium">Focus mode</span>
+      <svg
+        class="w-5 h-5 exit-focus-icon hidden"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+      <span class="exit-focus-text text-sm font-medium hidden">Exit focus</span>
+    </button>
+
+    <!-- Mobile layout -->
+    <div class="lg:hidden">
+      <MobileNav currentPath={Astro.url.pathname}/>
+      <main class="px-6 py-12 pt-24">
+        <slot/>
+      </main>
+    </div>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+      function initSidebarToggle() {
+        const sidebarVisible =
+          localStorage.getItem("sidebar-visible") !== "false";
+        const container = document.getElementById("desktop-layout");
+        const toggleBtn = document.getElementById("sidebar-toggle");
+        const focusModeIcon = document.querySelector(".focus-mode-icon");
+        const focusModeText = document.querySelector(".focus-mode-text");
+        const exitFocusIcon = document.querySelector(".exit-focus-icon");
+        const exitFocusText = document.querySelector(".exit-focus-text");
+
+        // Apply initial state
+        if (!sidebarVisible) {
+          container?.classList.add("sidebar-hidden");
+          // Show exit focus mode UI
+          focusModeIcon?.classList.add("hidden");
+          focusModeText?.classList.add("hidden");
+          exitFocusIcon?.classList.remove("hidden");
+          exitFocusText?.classList.remove("hidden");
+        }
+
+        // Toggle handler
+        toggleBtn?.addEventListener("click", () => {
+          const isHidden = container?.classList.toggle("sidebar-hidden");
+          localStorage.setItem("sidebar-visible", isHidden ? "false" : "true");
+
+          // Toggle button text and icons
+          if (isHidden) {
+            // In focus mode - show exit focus UI
+            focusModeIcon?.classList.add("hidden");
+            focusModeText?.classList.add("hidden");
+            exitFocusIcon?.classList.remove("hidden");
+            exitFocusText?.classList.remove("hidden");
+          } else {
+            // Not in focus mode - show focus mode UI
+            focusModeIcon?.classList.remove("hidden");
+            focusModeText?.classList.remove("hidden");
+            exitFocusIcon?.classList.add("hidden");
+            exitFocusText?.classList.add("hidden");
+          }
+        });
+      }
+
+      // Initialize on page load
+      initSidebarToggle();
+
+      // Reinitialize after Astro view transitions
+      document.addEventListener("astro:after-swap", initSidebarToggle);
+    </script>
+
+    <!-- Sidebar Animation Styles -->
+    <style is:inline>
+      #desktop-layout {
+        transition: grid-template-columns 600ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      #main-sidebar,
+      #list-panel {
+        overflow: hidden;
+      }
+
+      /* Default state - visible panels with delayed fade-in */
+      #main-sidebar {
+        transform: translateX(0);
+        opacity: 1;
+        transition:
+          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 400ms 200ms ease-in;
+      }
+
+      #list-panel {
+        transform: translateX(0);
+        opacity: 1;
+        transition:
+          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 400ms 200ms ease-in;
+      }
+
+      /* Hide both sidebar and list panel when toggled - quick fade out */
+      #desktop-layout.sidebar-hidden #main-sidebar {
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 200ms ease-out;
+      }
+
+      #desktop-layout.sidebar-hidden #list-panel {
+        transform: translateX(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 200ms ease-out;
+      }
+
+      /* Adjust grid when panels are hidden - content takes full width */
+      #desktop-layout.sidebar-hidden.has-list {
+        grid-template-columns: 0% 0% 100%;
+      }
+
+      #desktop-layout.sidebar-hidden.no-list {
+        grid-template-columns: 0% 100%;
+      }
+    </style>
   </body>
 </html>

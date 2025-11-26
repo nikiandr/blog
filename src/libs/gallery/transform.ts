@@ -1,5 +1,5 @@
-import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import type { GalleryImage } from "../../types/gallery";
 
 // Common image optimization options
@@ -53,4 +53,3 @@ export const transformImageToGalleryImage = async (
     alt,
   };
 };
-

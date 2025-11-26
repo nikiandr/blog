@@ -1,14 +1,13 @@
 ---
-import { getCollection } from "astro:content";
-import Content from "../../components/Content.astro";
-import List from "../../components/List.astro";
-import ListItem from "../../components/ListItem.astro";
-import Layout from "../../layouts/layout.astro";
+  import BlogList from "../../components/BlogList.astro";
+  import Content from "../../components/Content.astro";
+  import Layout from "../../layouts/layout.astro";
 
-const title = "Blog | Nikita Fordui";
-const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
+  const title = "Blog | Nikita Fordui";
 ---
 <Layout title={title}>
+  <BlogList slot="list-panel"/>
+
   <div class="mb-10">
     <h1
       class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
@@ -18,20 +17,8 @@ const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
   </div>
 
   <Content>
-    {allBlogPosts.length === 0 ? (
-      <p class="text-lg text-davy_gray dark:text-silver_gray-500">No blog posts yet.</p>
-    ) : (
-      <List>
-        {allBlogPosts.map((post, index) => (
-          <ListItem
-            href={`/blog/${post.id}`}
-            date={post.data.pubDate}
-            title={post.data.title}
-            description={post.data.description}
-            showDivider={index < allBlogPosts.length - 1}
-          />
-        ))}
-      </List>
-    )}
+    <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+      Welcome to my blog. Select a post from the list to read.
+    </p>
   </Content>
 </Layout>
