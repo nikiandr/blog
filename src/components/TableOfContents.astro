@@ -52,8 +52,10 @@
           const target = document.querySelector(href);
           if (target) {
             target.scrollIntoView({ behavior: "smooth", block: "start" });
-            // Update URL without jumping
-            history.pushState(null, "", href);
+            // Preserve query params when updating URL with fragment
+            const url = new URL(window.location.href);
+            url.hash = href;
+            history.pushState(null, "", url);
           }
         }
       });
