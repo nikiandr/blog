@@ -8,17 +8,19 @@
 <Layout title={title}>
   <BlogList slot="list-panel"/>
 
-  <div class="mb-10">
-    <h1
-      class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
-    >
-      Blog
-    </h1>
-  </div>
+  <div class="hidden lg:block">
+    <div class="mb-10">
+      <h1
+        class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
+      >
+        Blog
+      </h1>
+    </div>
 
-  <Content>
-    <p class="text-lg text-davy_gray dark:text-silver_gray-500">
-      Welcome to my blog. Select a post from the list to read.
-    </p>
-  </Content>
+    <Content>
+      <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+        Welcome to my blog. Select a post from the list to read.
+      </p>
+    </Content>
+  </div>
 </Layout>

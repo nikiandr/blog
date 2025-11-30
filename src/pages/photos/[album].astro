@@ -35,7 +35,7 @@
   const pageTitle = `${title} | Photos | Nikita Fordui`;
   const albumId = album.id.split("/")[0];
 ---
-<Layout title={pageTitle}>
+<Layout title={pageTitle} mobileBackLink="/photos" mobileBackLabel="All albums">
   <AlbumList slot="list-panel" currentAlbumId={albumId}/>
   <div class="mb-10">
     <h1

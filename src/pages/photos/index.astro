@@ -8,17 +8,19 @@
 <Layout title={title}>
   <AlbumList slot="list-panel"/>
 
-  <div class="mb-10">
-    <h1
-      class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
-    >
-      Photos
-    </h1>
-  </div>
+  <div class="hidden lg:block">
+    <div class="mb-10">
+      <h1
+        class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
+      >
+        Photos
+      </h1>
+    </div>
 
-  <Content>
-    <p class="text-lg text-davy_gray dark:text-silver_gray-500">
-      Browse my photo albums. Select an album from the list to view.
-    </p>
-  </Content>
+    <Content>
+      <p class="text-lg text-davy_gray dark:text-silver_gray-500">
+        Browse my photo albums. Select an album from the list to view.
+      </p>
+    </Content>
+  </div>
 </Layout>

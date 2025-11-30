@@ -17,7 +17,7 @@
 
   const title = `${post.data.title} | Nikita Fordui`;
 ---
-<Layout title={title}>
+<Layout title={title} mobileBackLink="/blog" mobileBackLabel="All posts">
   <BlogList slot="list-panel" currentSlug={post.id}/>
 
   <div class="mb-10">

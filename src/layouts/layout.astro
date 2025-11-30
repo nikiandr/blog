@@ -4,8 +4,18 @@
   import MobileNav from "../components/MobileNav.astro";
   import Sidebar from "../components/Sidebar.astro";
   import "../styles/global.css";
-  const { title } = Astro.props;
+
+  type Props = {
+    title: string;
+    mobileBackLink?: string;
+    mobileBackLabel?: string;
+  };
+
+  const { title, mobileBackLink, mobileBackLabel } = Astro.props;
   const hasListPanel = await Astro.slots.has("list-panel");
+  // If there's a back link, we're on a detail page (show content, not list)
+  // If no back link but has list panel, we're on an index page (show list only)
+  const isDetailPage = !!mobileBackLink;
 ---
 <html lang="en">
   <head>
@@ -145,7 +155,38 @@
     <div class="lg:hidden">
       <MobileNav currentPath={Astro.url.pathname}/>
       <main class="px-6 py-12 pt-24">
-        <slot/>
+        {/* Index pages with list: show only the list */}
+        {hasListPanel && !isDetailPage && (
+        <div class="mobile-list-panel">
+          <slot name="list-panel"/>
+        </div>
+        )}
+        {/* Detail pages: show back button + content */}
+        {isDetailPage && (
+        <a
+          href={mobileBackLink}
+          class="inline-flex items-center gap-2 mb-6 text-thistle dark:text-midnight_purple hover:opacity-80 transition-opacity"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>{mobileBackLabel || "Back"}</span>
+        </a>
+        )}
+        {/* Show main content on detail pages OR pages without list panel */}
+        {(isDetailPage || !hasListPanel) &&
+        <slot/>}
       </main>
     </div>
 
