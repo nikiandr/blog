@@ -6,7 +6,10 @@
   import Layout from "../../layouts/layout.astro";
 
   export async function getStaticPaths() {
-    const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
+    const allAlbums = await getCollection(
+      "albums",
+      ({ data }) => import.meta.env.DEV || !data.draft
+    );
 
     return allAlbums.map((albumEntry) => ({
       params: { album: albumEntry.id.split("/")[0] },

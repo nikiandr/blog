@@ -3,7 +3,10 @@
   import List from "./List.astro";
   import ListItem from "./ListItem.astro";
 
-  const allAlbums = await getCollection("albums", ({ data }) => !data.draft);
+  const allAlbums = await getCollection(
+    "albums",
+    ({ data }) => import.meta.env.DEV || !data.draft
+  );
 
   const sortedAlbums = allAlbums.sort(
     (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()

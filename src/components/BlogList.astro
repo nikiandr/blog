@@ -9,7 +9,10 @@
 
   const { currentSlug } = Astro.props;
 
-  const allBlogPosts = await getCollection("blog", ({ data }) => !data.draft);
+  const allBlogPosts = await getCollection(
+    "blog",
+    ({ data }) => import.meta.env.DEV || !data.draft
+  );
 
   const sortedPosts = allBlogPosts.sort(
     (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()

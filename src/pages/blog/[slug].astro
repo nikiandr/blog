@@ -5,7 +5,10 @@
   import Layout from "../../layouts/layout.astro";
 
   export async function getStaticPaths() {
-    const posts = await getCollection("blog", ({ data }) => !data.draft);
+    const posts = await getCollection(
+      "blog",
+      ({ data }) => import.meta.env.DEV || !data.draft
+    );
     return posts.map((pst) => ({
       params: { slug: pst.id },
       props: { post: pst },
