@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "fix": "ultracite fix",
+    "check": "ultracite check"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.10",

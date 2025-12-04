@@ -191,13 +191,13 @@
     <div class="lg:hidden">
       <MobileNav currentPath={Astro.url.pathname}/>
       <main class="px-6 py-12 pt-24">
-        {/* Index pages with list: show only the list */}
+        <!-- Index pages with list: show only the list -->
         {hasListPanel && !isDetailPage && (
         <div class="mobile-list-panel">
           <slot name="list-panel"/>
         </div>
         )}
-        {/* Detail pages: show back button + content */}
+        <!-- Detail pages: show back button + content -->
         {isDetailPage && (
         <a
           href={mobileBackLink}
@@ -220,7 +220,7 @@
           <span>{mobileBackLabel || "Back"}</span>
         </a>
         )}
-        {/* Show main content on detail pages OR pages without list panel */}
+        <!-- Show main content on detail pages OR pages without list panel -->
         {(isDetailPage || !hasListPanel) &&
         <slot/>}
       </main>
@@ -270,15 +270,19 @@
         const params = new URLSearchParams(window.location.search);
         const isFocusMode = params.get("focus") === "true";
 
-        if (!isFocusMode) return;
+        if (!isFocusMode) {
+          return;
+        }
 
         const links = document.querySelectorAll(
           'a[href^="/"], a[data-astro-prefetch]'
         );
 
-        links.forEach((link) => {
+        for (const link of links) {
           const href = link.getAttribute("href");
-          if (!href || href.startsWith("#")) return;
+          if (!href || href.startsWith("#")) {
+            continue;
+          }
 
           try {
             const url = new URL(href, window.location.origin);
@@ -293,7 +297,7 @@
           } catch (e) {
             // Skip invalid URLs
           }
-        });
+        }
       }
 
       function updateToggleButtonUI(isFocusMode) {

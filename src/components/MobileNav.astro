@@ -27,7 +27,9 @@
   ];
 
   const isActive = (href: string) => {
-    if (href === "/") return currentPath === "/";
+    if (href === "/") {
+      return currentPath === "/";
+    }
     return currentPath.startsWith(href);
   };
 ---
@@ -166,9 +168,11 @@
 
     // Close menu when clicking a nav link
     const navLinks = drawer?.querySelectorAll("a");
-    navLinks?.forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
+    if (navLinks) {
+      for (const link of navLinks) {
+        link.addEventListener("click", closeMenu);
+      }
+    }
   }
 
   // Initialize on page load
