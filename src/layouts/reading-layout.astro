@@ -1,0 +1,191 @@
+---
+  import "@fontsource/source-serif-4/400.css";
+  import "@fontsource/source-serif-4/400-italic.css";
+  import "@fontsource/source-serif-4/500.css";
+  import "@fontsource/source-serif-4/600.css";
+  import "@fontsource/inter-tight/400.css";
+  import "@fontsource/inter-tight/500.css";
+  import "@fontsource/inter-tight/600.css";
+  import { ClientRouter } from "astro:transitions";
+  import ThemeToggle from "../components/ThemeToggle.astro";
+  import "../styles/global.css";
+
+  type Props = {
+    title: string;
+    description?: string;
+    pubDate?: Date;
+  };
+
+  const { title, description, pubDate } = Astro.props;
+
+  const formattedDate = pubDate
+    ? pubDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <script is:inline>
+      const theme = localStorage.getItem("theme") || "system";
+
+      function shouldUseDarkMode(themeValue) {
+        if (themeValue === "dark") return true;
+        if (themeValue === "light") return false;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+
+      if (shouldUseDarkMode(theme)) {
+        document.documentElement.classList.add("dark");
+      }
+
+      document.addEventListener("astro:before-swap", (e) => {
+        const savedTheme = localStorage.getItem("theme") || "system";
+        if (shouldUseDarkMode(savedTheme)) {
+          e.newDocument.documentElement.classList.add("dark");
+        } else {
+          e.newDocument.documentElement.classList.remove("dark");
+        }
+      });
+    </script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="theme-color" content="#faf8f5">
+    <ClientRouter/>
+  </head>
+  <body
+    class="bg-paper dark:bg-paper_dark text-ink-700 dark:text-ink_dark-200 min-h-screen transition-colors duration-300"
+  >
+    <!-- Reading progress bar -->
+    <div id="reading-progress" class="reading-progress"></div>
+
+    <!-- Minimal header -->
+    <header
+      class="fixed top-0 left-0 right-0 z-40 bg-paper/80 dark:bg-paper_dark/80 backdrop-blur-sm border-b border-border/30 dark:border-border-dark/30"
+    >
+      <div
+        class="max-w-[80rem] mx-auto px-6 py-3 flex items-center justify-between"
+      >
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 text-ink-500 dark:text-ink_dark-400 hover:text-accent dark:hover:text-accent_dark transition-colors font-sans text-sm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>All posts</span>
+        </a>
+        <ThemeToggle/>
+      </div>
+    </header>
+
+    <!-- Main content with sidenote margins -->
+    <main class="pt-20 pb-24">
+      <article class="max-w-[80rem] mx-auto px-6">
+        <!-- Article header -->
+        <header
+          class="max-w-[42rem] mx-auto mb-12 xl:ml-[calc(50%-21rem-140px)]"
+        >
+          {formattedDate && (
+            <time
+              class="block text-sm font-sans text-ink-400 dark:text-ink_dark-400 mb-4 uppercase tracking-wider"
+              datetime={pubDate?.toISOString()}
+            >
+              {formattedDate}
+            </time>
+          )}
+          <h1
+            class="text-4xl md:text-5xl font-normal text-ink dark:text-ink_dark leading-[1.15] tracking-tight mb-6"
+          >
+            {title}
+          </h1>
+          {description && (
+            <p class="text-xl text-ink-500 dark:text-ink_dark-300 leading-relaxed">
+              {description}
+            </p>
+          )}
+        </header>
+
+        <!-- Article body with sidenote container -->
+        <div class="relative">
+          <!-- Content wrapper - centered with right margin for sidenotes -->
+          <div class="max-w-[42rem] mx-auto xl:ml-[calc(50%-21rem-140px)]">
+            <div class="prose">
+              <slot/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Article footer -->
+        <footer
+          class="max-w-[42rem] mx-auto mt-16 pt-8 border-t border-border dark:border-border-dark xl:ml-[calc(50%-21rem-140px)]"
+        >
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-accent dark:text-accent_dark hover:text-accent-light dark:hover:text-accent_dark-light transition-colors font-sans"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            <span>Back to all posts</span>
+          </a>
+        </footer>
+      </article>
+    </main>
+
+    <!-- Reading progress script -->
+    <script>
+      function updateReadingProgress() {
+        const progress = document.getElementById("reading-progress");
+        if (!progress) return;
+
+        const scrollTop = window.scrollY;
+        const docHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+        progress.style.width = `${scrollPercent}%`;
+      }
+
+      window.addEventListener("scroll", updateReadingProgress, {
+        passive: true,
+      });
+      updateReadingProgress();
+
+      document.addEventListener("astro:after-swap", () => {
+        updateReadingProgress();
+      });
+    </script>
+  </body>
+</html>

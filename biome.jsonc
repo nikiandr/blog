@@ -1,10 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": [
-    "ultracite/core",
-    "ultracite/react",
-    "ultracite/astro"
-  ],
+  "extends": ["ultracite/core", "ultracite/react", "ultracite/astro"],
   "css": {
     "parser": {
       "cssModules": false
@@ -15,10 +11,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "src/components/**/*.astro",
-        "src/components/**/*.tsx"
-      ],
+      "includes": ["src/components/**/*.astro", "src/components/**/*.tsx"],
       "linter": {
         "rules": {
           "style": {

@@ -1,21 +1,32 @@
 ---
-  import "@fontsource/stack-sans-headline";
+  import "@fontsource/source-serif-4/400.css";
+  import "@fontsource/source-serif-4/500.css";
+  import "@fontsource/source-serif-4/600.css";
+  import "@fontsource/inter-tight/400.css";
+  import "@fontsource/inter-tight/500.css";
+  import "@fontsource/inter-tight/600.css";
   import { ClientRouter } from "astro:transitions";
-  import MobileNav from "../components/MobileNav.astro";
-  import Sidebar from "../components/Sidebar.astro";
+  import ThemeToggle from "../components/ThemeToggle.astro";
   import "../styles/global.css";
 
   type Props = {
     title: string;
-    mobileBackLink?: string;
-    mobileBackLabel?: string;
   };
 
-  const { title, mobileBackLink, mobileBackLabel } = Astro.props;
-  const hasListPanel = await Astro.slots.has("list-panel");
-  // If there's a back link, we're on a detail page (show content, not list)
-  // If no back link but has list panel, we're on an index page (show list only)
-  const isDetailPage = !!mobileBackLink;
+  const { title } = Astro.props;
+  const currentPath = Astro.url.pathname;
+
+  const navItems = [
+    { label: "About", href: "/about-me" },
+    { label: "Blog", href: "/blog" },
+    { label: "Photos", href: "/photos" },
+    { label: "Contact", href: "/contact" },
+  ];
+
+  const isActive = (href: string) => {
+    if (href === "/") return currentPath === "/";
+    return currentPath.startsWith(href);
+  };
 ---
 <html lang="en">
   <head>
@@ -27,44 +38,13 @@
       const theme = localStorage.getItem("theme") || "system";
 
       function shouldUseDarkMode(themeValue) {
-        if (themeValue === "dark") {
-          return true;
-        }
-        if (themeValue === "light") {
-          return false;
-        }
-        // system theme - check OS preference
+        if (themeValue === "dark") return true;
+        if (themeValue === "light") return false;
         return window.matchMedia("(prefers-color-scheme: dark)").matches;
       }
 
       if (shouldUseDarkMode(theme)) {
         document.documentElement.classList.add("dark");
-      }
-
-      // Apply focus mode from query parameter immediately (before render)
-      const focusParams = new URLSearchParams(window.location.search);
-      const isFocusMode = focusParams.get("focus") === "true";
-
-      // Apply class as soon as element is available (before animations)
-      if (isFocusMode) {
-        // Try to apply immediately if DOM is ready
-        const container = document.getElementById("desktop-layout");
-        if (container) {
-          container.classList.add("sidebar-hidden");
-        } else {
-          // If not ready yet, use MutationObserver on document.documentElement
-          const observer = new MutationObserver(() => {
-            const el = document.getElementById("desktop-layout");
-            if (el) {
-              el.classList.add("sidebar-hidden");
-              observer.disconnect();
-            }
-          });
-          observer.observe(document.documentElement, {
-            childList: true,
-            subtree: true,
-          });
-        }
       }
 
       document.addEventListener("astro:before-swap", (e) => {
@@ -73,16 +53,6 @@
           e.newDocument.documentElement.classList.add("dark");
         } else {
           e.newDocument.documentElement.classList.remove("dark");
-        }
-
-        // Handle focus mode for new document
-        const newUrl = new URL(e.newDocument.URL);
-        const newFocusMode = newUrl.searchParams.get("focus") === "true";
-        const container = e.newDocument.getElementById("desktop-layout");
-        if (newFocusMode) {
-          container?.classList.add("sidebar-hidden");
-        } else {
-          container?.classList.remove("sidebar-hidden");
         }
       });
     </script>
@@ -105,316 +75,161 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#faf8f5">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#faf8f5">
     <ClientRouter/>
   </head>
   <body
-    class="font-sans bg-alice_blue dark:bg-dark_slate text-davy_gray dark:text-silver_gray-500 min-h-screen transition-colors duration-300"
+    class="bg-paper dark:bg-paper_dark text-ink-700 dark:text-ink_dark-200 min-h-screen transition-colors duration-300"
   >
-    <!-- Desktop three-panel layout -->
-    <div
-      id="desktop-layout"
-      class={`hidden lg:grid lg:h-screen ${
-        hasListPanel ? "has-list lg:grid-cols-[15%_35%_50%]" : "no-list lg:grid-cols-[15%_85%]"
-      }`}
+    <!-- Site Header -->
+    <header
+      class="sticky top-0 z-40 bg-paper/95 dark:bg-paper_dark/95 backdrop-blur-sm border-b border-border/30 dark:border-border-dark/30 transition-colors duration-300"
     >
-      <!-- Left Sidebar -->
-      <aside id="main-sidebar">
-        <Sidebar currentPath={Astro.url.pathname}/>
-      </aside>
-
-      <!-- Middle List Panel (conditional) -->
-      {hasListPanel && (
-        <aside
-          id="list-panel"
-          class="hide-scrollbar overflow-y-auto border-r border-platinum/30 dark:border-slate_border/50 bg-alice_blue dark:bg-dark_slate transition-colors duration-300"
-        >
-          <slot name="list-panel"/>
-        </aside>
-      )}
-
-      <!-- Right Content Panel -->
-      <main
-        class="overflow-y-auto px-6 py-12 bg-alice_blue dark:bg-dark_slate transition-colors duration-300"
-      >
-        <div class="max-w-5xl mx-auto">
-          <slot/>
-        </div>
-      </main>
-    </div>
-
-    <!-- Focus Mode Toggle Button -->
-    <button
-      id="sidebar-toggle"
-      class="fixed bottom-6 right-6 lg:flex hidden z-40 items-center gap-2 px-4 py-3 rounded-full bg-thistle dark:bg-midnight_purple text-white hover:scale-105 transition-all duration-300 shadow-lg"
-      aria-label="Toggle focus mode"
-    >
-      <svg
-        class="w-5 h-5 focus-mode-icon"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-        />
-      </svg>
-      <span class="focus-mode-text text-sm font-medium">Focus mode</span>
-      <svg
-        class="w-5 h-5 exit-focus-icon hidden"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-      <span class="exit-focus-text text-sm font-medium hidden">Exit focus</span>
-    </button>
-
-    <!-- Mobile layout -->
-    <div class="lg:hidden">
-      <MobileNav currentPath={Astro.url.pathname}/>
-      <main class="px-6 py-12 pt-24">
-        <!-- Index pages with list: show only the list -->
-        {hasListPanel && !isDetailPage && (
-        <div class="mobile-list-panel">
-          <slot name="list-panel"/>
-        </div>
-        )}
-        <!-- Detail pages: show back button + content -->
-        {isDetailPage && (
-        <a
-          href={mobileBackLink}
-          class="inline-flex items-center gap-2 mb-6 text-thistle dark:text-midnight_purple hover:opacity-80 transition-opacity"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div class="max-w-3xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Site Title -->
+          <a
+            href="/"
+            class="text-lg font-medium text-ink dark:text-ink_dark hover:text-accent dark:hover:text-accent_dark transition-colors duration-300 font-sans"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          <span>{mobileBackLabel || "Back"}</span>
-        </a>
-        )}
-        <!-- Show main content on detail pages OR pages without list panel -->
-        {(isDetailPage || !hasListPanel) &&
-        <slot/>}
-      </main>
-    </div>
+            Nikita Fordui
+          </a>
 
-    <!-- Sidebar Toggle Script -->
+          <!-- Navigation -->
+          <nav class="hidden sm:flex items-center gap-6 font-sans text-sm">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                data-astro-prefetch
+                class={`transition-colors duration-300 ${
+                  isActive(item.href)
+                    ? "text-accent dark:text-accent_dark font-medium"
+                    : "text-ink-500 dark:text-ink_dark-400 hover:text-accent dark:hover:text-accent_dark"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <ThemeToggle/>
+          </nav>
+
+          <!-- Mobile menu button -->
+          <button
+            id="mobile-menu-btn"
+            class="sm:hidden p-2 -mr-2 text-ink-500 dark:text-ink_dark-400 hover:text-ink dark:hover:text-ink_dark transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav
+          id="mobile-nav"
+          class="sm:hidden hidden pt-4 pb-2 border-t border-border/30 dark:border-border-dark/30 mt-4 font-sans text-sm"
+        >
+          <div class="flex flex-col gap-3">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                data-astro-prefetch
+                class={`py-1 transition-colors duration-300 ${
+                  isActive(item.href)
+                    ? "text-accent dark:text-accent_dark font-medium"
+                    : "text-ink-500 dark:text-ink_dark-400"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <div class="pt-2">
+              <ThemeToggle/>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-6 py-12 md:py-16">
+      <slot/>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="border-t border-border/30 dark:border-border-dark/30 mt-16 transition-colors duration-300"
+    >
+      <div class="max-w-3xl mx-auto px-6 py-10">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+        >
+          <!-- Contact CTA -->
+          <div>
+            <p
+              class="text-ink-600 dark:text-ink_dark-300 mb-2 font-sans text-sm"
+            >
+              Want to connect?
+            </p>
+            <div class="flex gap-4 font-sans text-sm">
+              <a
+                href="mailto:inbox@nfordui.com"
+                class="text-accent dark:text-accent_dark hover:text-accent-light dark:hover:text-accent_dark-light transition-colors"
+              >
+                Email
+              </a>
+              <a
+                href="https://github.com/nikiandr"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent dark:text-accent_dark hover:text-accent-light dark:hover:text-accent_dark-light transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nikita-fordui/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent dark:text-accent_dark hover:text-accent-light dark:hover:text-accent_dark-light transition-colors"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <!-- Copyright -->
+          <p class="text-sm text-ink-400 dark:text-ink_dark-500 font-sans">
+            &copy; {new Date().getFullYear()} Nikita Fordui
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
     <script>
-      function initSidebarToggle() {
-        const container = document.getElementById("desktop-layout");
-        const toggleBtn = document.getElementById("sidebar-toggle");
+      function initMobileMenu() {
+        const btn = document.getElementById("mobile-menu-btn");
+        const nav = document.getElementById("mobile-nav");
 
-        // Check if focus mode should be enabled from URL query param
-        const params = new URLSearchParams(window.location.search);
-        const isFocusMode = params.get("focus") === "true";
-
-        // Re-apply class after view transitions or if not already applied
-        if (isFocusMode && !container?.classList.contains("sidebar-hidden")) {
-          container?.classList.add("sidebar-hidden");
-        } else if (
-          !isFocusMode &&
-          container?.classList.contains("sidebar-hidden")
-        ) {
-          container?.classList.remove("sidebar-hidden");
-        }
-
-        // Update button UI to match current state
-        updateToggleButtonUI(isFocusMode);
-
-        // Toggle handler - updates URL instead of localStorage
-        toggleBtn?.addEventListener("click", () => {
-          const isHidden = container?.classList.toggle("sidebar-hidden");
-
-          const url = new URL(window.location.href);
-          if (isHidden) {
-            url.searchParams.set("focus", "true");
-          } else {
-            url.searchParams.delete("focus");
-          }
-          history.pushState({}, "", url);
-
-          // Update button UI
-          updateToggleButtonUI(isHidden);
+        btn?.addEventListener("click", () => {
+          nav?.classList.toggle("hidden");
         });
       }
 
-      function preserveFocusInLinks() {
-        const params = new URLSearchParams(window.location.search);
-        const isFocusMode = params.get("focus") === "true";
-
-        if (!isFocusMode) {
-          return;
-        }
-
-        const links = document.querySelectorAll(
-          'a[href^="/"], a[data-astro-prefetch]'
-        );
-
-        for (const link of links) {
-          const href = link.getAttribute("href");
-          if (!href || href.startsWith("#")) {
-            continue;
-          }
-
-          try {
-            const url = new URL(href, window.location.origin);
-
-            if (
-              !url.searchParams.has("focus") &&
-              url.origin === window.location.origin
-            ) {
-              url.searchParams.set("focus", "true");
-              link.setAttribute("href", url.pathname + url.search + url.hash);
-            }
-          } catch (e) {
-            // Skip invalid URLs
-          }
-        }
-      }
-
-      function updateToggleButtonUI(isFocusMode) {
-        const focusModeIcon = document.querySelector(".focus-mode-icon");
-        const focusModeText = document.querySelector(".focus-mode-text");
-        const exitFocusIcon = document.querySelector(".exit-focus-icon");
-        const exitFocusText = document.querySelector(".exit-focus-text");
-
-        if (isFocusMode) {
-          focusModeIcon?.classList.add("hidden");
-          focusModeText?.classList.add("hidden");
-          exitFocusIcon?.classList.remove("hidden");
-          exitFocusText?.classList.remove("hidden");
-        } else {
-          focusModeIcon?.classList.remove("hidden");
-          focusModeText?.classList.remove("hidden");
-          exitFocusIcon?.classList.add("hidden");
-          exitFocusText?.classList.add("hidden");
-        }
-      }
-
-      // Handle browser back/forward
-      window.addEventListener("popstate", () => {
-        const params = new URLSearchParams(window.location.search);
-        const shouldBeFocusMode = params.get("focus") === "true";
-        const container = document.getElementById("desktop-layout");
-        const isFocusMode = container?.classList.contains("sidebar-hidden");
-
-        if (shouldBeFocusMode !== isFocusMode) {
-          if (shouldBeFocusMode) {
-            container?.classList.add("sidebar-hidden");
-          } else {
-            container?.classList.remove("sidebar-hidden");
-          }
-          updateToggleButtonUI(shouldBeFocusMode);
-        }
-      });
-
-      // Initialize on page load
-      initSidebarToggle();
-      preserveFocusInLinks();
-
-      // Reinitialize after Astro view transitions
-      document.addEventListener("astro:after-swap", () => {
-        initSidebarToggle();
-        preserveFocusInLinks();
-      });
-
-      // Handle view transition swap
-      document.addEventListener("astro:before-swap", (e) => {
-        const newUrl = new URL(e.newDocument.URL);
-        const newFocusMode = newUrl.searchParams.get("focus") === "true";
-
-        const container = e.newDocument.getElementById("desktop-layout");
-        if (newFocusMode) {
-          container?.classList.add("sidebar-hidden");
-        } else {
-          container?.classList.remove("sidebar-hidden");
-        }
-      });
+      initMobileMenu();
+      document.addEventListener("astro:after-swap", initMobileMenu);
     </script>
-
-    <!-- Sidebar Animation Styles -->
-    <style is:inline>
-      #desktop-layout {
-        transition: grid-template-columns 600ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      #main-sidebar,
-      #list-panel {
-        overflow: hidden;
-      }
-
-      /* Default state - visible panels with delayed fade-in */
-      #main-sidebar {
-        transform: translateX(0);
-        opacity: 1;
-        transition:
-          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 400ms 200ms ease-in;
-      }
-
-      #list-panel {
-        transform: translateX(0);
-        opacity: 1;
-        transition:
-          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 400ms 200ms ease-in;
-      }
-
-      /* Hide both sidebar and list panel when toggled - quick fade out */
-      #desktop-layout.sidebar-hidden #main-sidebar {
-        transform: translateX(-100%);
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 200ms ease-out;
-      }
-
-      #desktop-layout.sidebar-hidden #list-panel {
-        transform: translateX(-100%);
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 200ms ease-out;
-      }
-
-      /* Adjust grid when panels are hidden - content takes full width */
-      #desktop-layout.sidebar-hidden.has-list {
-        grid-template-columns: 0% 0% 100%;
-      }
-
-      #desktop-layout.sidebar-hidden.no-list {
-        grid-template-columns: 0% 100%;
-      }
-    </style>
   </body>
 </html>

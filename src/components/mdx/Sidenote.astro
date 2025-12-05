@@ -1,0 +1,14 @@
+---
+  interface Props {
+    id: string;
+  }
+
+  const { id } = Astro.props;
+---
+<span class="sidenote-wrapper">
+  <label class="sidenote-number" for={`sn-${id}`}></label>
+  <input type="checkbox" id={`sn-${id}`} class="sidenote-checkbox">
+  <span class="sidenote">
+    <slot/>
+  </span>
+</span>

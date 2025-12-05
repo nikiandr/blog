@@ -54,7 +54,7 @@ export const Gallery = ({ images, className = "" }: GalleryProps) => {
 
           return (
             <a
-              className={`group relative block overflow-hidden rounded-lg bg-platinum/20 dark:bg-dark_slate-400 ${gridClass}`}
+              className={`group relative block overflow-hidden rounded-lg bg-paper-300 dark:bg-paper_dark-50 ${gridClass}`}
               data-pswp-height={image.lightbox.height}
               data-pswp-width={image.lightbox.width}
               href={image.lightbox.src}
@@ -77,7 +77,7 @@ export const Gallery = ({ images, className = "" }: GalleryProps) => {
                 width={image.thumbnail.width}
               />
               {/* Hover overlay */}
-              <div className="absolute inset-0 bg-payne_gray/0 transition-colors duration-300 group-hover:bg-payne_gray/10 dark:group-hover:bg-silver_gray/10" />
+              <div className="absolute inset-0 bg-ink/0 transition-colors duration-300 group-hover:bg-ink/10 dark:group-hover:bg-ink_dark/10" />
             </a>
           );
         })}
@@ -86,7 +86,7 @@ export const Gallery = ({ images, className = "" }: GalleryProps) => {
       {/* Empty state */}
       {images.length === 0 && (
         <div className="py-12 text-center">
-          <p className="text-davy_gray text-lg dark:text-silver_gray-500">
+          <p className="text-ink-500 text-lg dark:text-ink_dark-400">
             No photos in this album yet.
           </p>
         </div>

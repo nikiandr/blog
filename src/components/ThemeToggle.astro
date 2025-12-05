@@ -1,5 +1,5 @@
 <div
-  class="flex items-center gap-1 p-1 bg-white/50 dark:bg-dark_slate-400 border border-platinum/30 dark:border-slate_border/50 rounded-full"
+  class="flex items-center gap-1 p-1 bg-paper-200/50 dark:bg-paper_dark-100 border border-border/30 dark:border-border-dark/30 rounded-full"
 >
   <button
     data-theme="light"
@@ -95,29 +95,29 @@
       const buttonTheme = button.dataset.theme;
       if (buttonTheme === theme) {
         button.classList.add(
-          "bg-thistle",
-          "dark:bg-midnight_purple",
+          "bg-accent",
+          "dark:bg-accent_dark",
           "text-white",
-          "dark:text-dark_slate"
+          "dark:text-paper_dark"
         );
         button.classList.remove(
-          "text-payne_gray",
-          "dark:text-silver_gray",
-          "hover:text-thistle",
-          "dark:hover:text-midnight_purple"
+          "text-ink-500",
+          "dark:text-ink_dark-400",
+          "hover:text-accent",
+          "dark:hover:text-accent_dark"
         );
       } else {
         button.classList.remove(
-          "bg-thistle",
-          "dark:bg-midnight_purple",
+          "bg-accent",
+          "dark:bg-accent_dark",
           "text-white",
-          "dark:text-dark_slate"
+          "dark:text-paper_dark"
         );
         button.classList.add(
-          "text-payne_gray",
-          "dark:text-silver_gray",
-          "hover:text-thistle",
-          "dark:hover:text-midnight_purple"
+          "text-ink-500",
+          "dark:text-ink_dark-400",
+          "hover:text-accent",
+          "dark:hover:text-accent_dark"
         );
       }
     }

@@ -1,0 +1,107 @@
+---
+title: "Typography for the Web: A Practical Guide"
+description: "Exploring the principles of good web typography, from sidenotes to small caps, and how to apply them in modern web design."
+pubDate: 2025-01-15
+draft: true
+---
+import Epigraph from '../components/mdx/Epigraph.astro';
+import Sidenote from '../components/mdx/Sidenote.astro';
+import Marginnote from '../components/mdx/Marginnote.astro';
+import Figure from '../components/mdx/Figure.astro';
+import stockholmImage from '../albums/stockholm/IMG_0560.jpg';
+
+<Epigraph cite="Robert Bringhurst, The Elements of Typographic Style">
+  Typography exists to honor content.
+</Epigraph>
+
+<span class="newthought">Good typography is invisible.</span> When done well, it serves the reader without calling attention to itself. The letters, the spacing, the rhythm of the text—all work together to create a seamless reading experience<Sidenote id="1">This principle comes from Beatrice Warde's famous 1932 essay "The Crystal Goblet," where she argued that typography should be like a crystal goblet: transparent, allowing the wine (content) to be seen clearly.</Sidenote>.
+
+Yet achieving this invisibility requires deliberate, careful design choices. Every decision—from font selection to line length to the handling of footnotes—shapes how readers engage with your words.
+
+## The Challenge of Digital Typography
+
+Print typography has centuries of refinement behind it. Gutenberg's innovations in the 15th century laid foundations that typographers have been building upon ever since<Sidenote id="2">Johannes Gutenberg introduced movable type to Europe around 1440, though similar technologies existed in China and Korea centuries earlier.</Sidenote>. The web, by contrast, is barely three decades old.
+
+<Marginnote>The average screen displays text at 72-96 PPI, while print typically achieves 300+ DPI. This fundamental difference affects nearly every typographic decision.</Marginnote>
+
+When we moved from paper to pixels, we brought our assumptions with us—sometimes helpfully, often not. The web is not print. Webpages are not books. Yet the principles that make text readable remain constant across media.
+
+### Line Length and Measure
+
+The optimal line length for comfortable reading is typically cited as 45-75 characters<Sidenote id="3">This recommendation appears in numerous typography guides, including Bringhurst's "Elements of Typographic Style" and research by typographer Emil Ruder.</Sidenote>. Too short, and the eye must jump too frequently, disrupting the reading rhythm. Too long, and readers struggle to track back to the beginning of the next line.
+
+On the web, this translates to a content width of roughly 600-700 pixels for body text at standard sizes. This blog uses a maximum width of approximately 672 pixels (42rem), landing comfortably within this range.
+
+### The Rhythm of Text
+
+<span class="newthought">Vertical rhythm</span> refers to the consistent spacing between lines and elements. When headings, paragraphs, and other elements align to a consistent baseline grid, the page feels more harmonious.
+
+Consider these principles:
+
+1. **Line height** should be generous—typically 1.5 to 1.75 times the font size for body text
+2. **Paragraph spacing** should create clear separation without excessive gaps
+3. **Heading margins** should create hierarchy while maintaining flow
+
+## Sidenotes: A Better Footnote
+
+Traditional footnotes force readers to break their concentration, jumping to the bottom of the page and back. Endnotes are worse—requiring navigation to an entirely different location<Sidenote id="4">Academic papers often use endnotes for practical reasons, but they significantly increase cognitive load for readers who want to check references.</Sidenote>.
+
+Sidenotes solve this elegantly. By placing notes in the margin, adjacent to the relevant text, readers can glance at additional information without losing their place.
+
+<Figure
+  src={stockholmImage}
+  alt="Stockholm waterfront with traditional architecture"
+  caption="Figure 1: Good typography, like good architecture, balances form and function."
+/>
+
+Edward Tufte popularized this approach in his books on data visualization. His self-published works demonstrate how margin notes can provide commentary, citations, and small figures without interrupting the main narrative<Sidenote id="5">Tufte's books—including "The Visual Display of Quantitative Information" and "Envisioning Information"—are themselves masterclasses in typography and layout.</Sidenote>.
+
+## Small Caps and Other Refinements
+
+Acronyms and abbreviations present a typographic challenge. Written in full capitals, they shout from the page, disrupting the even texture of body text. <span class="small-caps">HTML</span>, <span class="small-caps">CSS</span>, and <span class="small-caps">API</span> look more refined in small caps.
+
+<Marginnote>Small caps have the same height as lowercase letters but the form of capitals. They were originally cut as separate fonts; today, well-designed typefaces include true small caps as an OpenType feature.</Marginnote>
+
+Other typographic refinements worth considering:
+
+- **Proper quotation marks** ("curly quotes") rather than straight quotes
+- **Em dashes**—like these—for parenthetical statements
+- **Ellipses** that are properly spaced…
+- **Hanging punctuation** for pull quotes and lists
+
+## The Role of Whitespace
+
+<span class="newthought">What you leave out</span> matters as much as what you include. Generous margins aren't wasted space—they provide rest for the eye and room for margin notes.
+
+The traditional book page often devoted nearly half its area to margins. This wasn't extravagance; it was recognition that reading requires visual breathing room.
+
+On the web, we've often erred in the opposite direction, cramming content edge-to-edge in pursuit of "efficiency." But readers don't want efficiency. They want comprehension.
+
+## Practical Implementation
+
+Implementing good typography on the web requires attention to several layers:
+
+### The Foundation
+- Choose typefaces designed for screen reading
+- Set appropriate base sizes (16-18px minimum for body text)
+- Establish a consistent vertical rhythm
+
+### The Details
+- Use proper typographic characters
+- Apply small caps where appropriate
+- Handle long-form content with sidenotes and figures
+
+### The Polish
+- Ensure sufficient contrast ratios for accessibility
+- Test across different screen sizes and devices
+- Respect user preferences (dark mode, reduced motion)
+
+## Conclusion
+
+<Epigraph cite="Jan Tschichold">
+  Perfect typography is more a science than an art.
+</Epigraph>
+
+Typography for the web is still evolving. New capabilities—variable fonts, container queries, better hyphenation—continue to expand what's possible. But the fundamentals remain unchanged: serve the reader, honor the content, and get out of the way<Sidenote id="6">Or as Beatrice Warde put it: "Type well used is invisible as type, just as the perfect talking voice is the unnoticed vehicle for the transmission of words, ideas."</Sidenote>.
+
+The best typography doesn't draw attention to itself. It simply makes reading a pleasure.

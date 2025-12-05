@@ -16,18 +16,18 @@
 ---
 {filteredHeadings.length > 0 && (
   <aside class="sticky top-6">
-    <nav class="w-64">
-      <p class="text-sm font-semibold text-payne_gray dark:text-silver_gray mb-4 transition-colors duration-300">
+    <nav class="w-64 font-sans">
+      <p class="text-sm font-semibold text-ink dark:text-ink_dark mb-4 transition-colors duration-300">
         On this page
       </p>
-      <ul class="space-y-2 text-sm border-l border-platinum/40 dark:border-slate_border/60 transition-colors duration-300">
+      <ul class="space-y-2 text-sm border-l border-border/40 dark:border-border-dark/40 transition-colors duration-300">
         {filteredHeadings.map((heading) => {
-          const paddingClass = heading.depth === 1 ? 'pl-3' : heading.depth === 2 ? 'pl-5' : 'pl-7';
+          const paddingClass = heading.depth === 1 ? "pl-3" : heading.depth === 2 ? "pl-5" : "pl-7";
           return (
             <li class={paddingClass}>
               <a
                 href={`#${heading.slug}`}
-                class="block py-1 text-davy_gray dark:text-silver_gray-500 hover:text-thistle dark:hover:text-midnight_purple transition-colors duration-200 leading-snug"
+                class="block py-1 text-ink-500 dark:text-ink_dark-400 hover:text-accent dark:hover:text-accent_dark transition-colors duration-200 leading-snug"
               >
                 {heading.text}
               </a>
@@ -72,22 +72,19 @@
             // Remove active class from all links
             for (const l of document.querySelectorAll("aside nav a")) {
               l.classList.remove(
-                "text-thistle",
-                "dark:text-midnight_purple",
+                "text-accent",
+                "dark:text-accent_dark",
                 "font-medium"
               );
-              l.classList.add("text-davy_gray", "dark:text-silver_gray-500");
+              l.classList.add("text-ink-500", "dark:text-ink_dark-400");
             }
 
             // Add active class to current link
             if (link) {
-              link.classList.remove(
-                "text-davy_gray",
-                "dark:text-silver_gray-500"
-              );
+              link.classList.remove("text-ink-500", "dark:text-ink_dark-400");
               link.classList.add(
-                "text-thistle",
-                "dark:text-midnight_purple",
+                "text-accent",
+                "dark:text-accent_dark",
                 "font-medium"
               );
             }

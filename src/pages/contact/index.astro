@@ -1,20 +1,17 @@
 ---
   import ContactMe from "../../components/ContactMe.astro";
-  import Content from "../../components/Content.astro";
   import Layout from "../../layouts/layout.astro";
 
-  const title = "Contact me | Nikita Fordui";
+  const title = "Contact | Nikita Fordui";
 ---
 <Layout title={title}>
-  <div class="mb-10">
+  <header class="mb-12">
     <h1
-      class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
+      class="text-4xl md:text-5xl font-normal text-ink dark:text-ink_dark tracking-tight"
     >
-      Contact me
+      Contact
     </h1>
-  </div>
+  </header>
 
-  <Content>
-    <ContactMe/>
-  </Content>
+  <ContactMe/>
 </Layout>

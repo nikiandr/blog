@@ -1,0 +1,26 @@
+---
+  import { Image } from "astro:assets";
+
+  interface Props {
+    src: ImageMetadata;
+    alt: string;
+    caption?: string;
+    wide?: boolean;
+  }
+
+  const { src, alt, caption, wide = false } = Astro.props;
+---
+<figure class:list={["my-8", { "xl:-mx-24": wide }]}>
+  <Image
+    src={src}
+    alt={alt}
+    class="w-full h-auto rounded-lg"
+    loading="lazy"
+    decoding="async"
+  />
+  {caption && (
+    <figcaption class="text-center text-sm text-ink-400 dark:text-ink_dark-400 mt-3 italic">
+      {caption}
+    </figcaption>
+  )}
+</figure>

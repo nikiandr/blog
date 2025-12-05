@@ -1,0 +1,20 @@
+---
+  interface Props {
+    id?: string;
+  }
+
+  const { id } = Astro.props;
+---
+<span class="marginnote-wrapper">
+  {id && <span id={id} class="marginnote-anchor"></span>}
+  <span class="marginnote">
+    <slot/>
+  </span>
+</span>
+
+<style>
+  .marginnote-anchor {
+    position: absolute;
+    visibility: hidden;
+  }
+</style>

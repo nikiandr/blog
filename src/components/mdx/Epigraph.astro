@@ -1,0 +1,15 @@
+---
+  interface Props {
+    cite?: string;
+  }
+
+  const { cite } = Astro.props;
+---
+<div class="epigraph">
+  <blockquote>
+    <p>
+      <slot/>
+    </p>
+  </blockquote>
+  {cite && <footer>{cite}</footer>}
+</div>

@@ -1,26 +1,75 @@
 ---
-  import AlbumList from "../../components/AlbumList.astro";
-  import Content from "../../components/Content.astro";
+  import { Image } from "astro:assets";
+  import { getCollection } from "astro:content";
   import Layout from "../../layouts/layout.astro";
 
   const title = "Photos | Nikita Fordui";
+
+  const allAlbums = await getCollection(
+    "albums",
+    ({ data }) => import.meta.env.DEV || !data.draft
+  );
+
+  const sortedAlbums = allAlbums.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  );
+
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+    });
 ---
 <Layout title={title}>
-  <AlbumList slot="list-panel"/>
+  <header class="mb-12">
+    <h1
+      class="text-4xl md:text-5xl font-normal text-ink dark:text-ink_dark tracking-tight mb-4"
+    >
+      Photos
+    </h1>
+    <p class="text-lg text-ink-500 dark:text-ink_dark-400 leading-relaxed">
+      Photo albums from my travels and experiences.
+    </p>
+  </header>
 
-  <div class="hidden lg:block">
-    <div class="mb-10">
-      <h1
-        class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
-      >
-        Photos
-      </h1>
+  {sortedAlbums.length === 0 ? (
+    <p class="text-lg text-ink-500 dark:text-ink_dark-400">
+      No albums yet. Check back soon.
+    </p>
+  ) : (
+    <div class="grid gap-8 sm:grid-cols-2">
+      {sortedAlbums.map((album) => {
+        const albumId = album.id.split("/")[0];
+        return (
+          <a
+            href={`/photos/${albumId}`}
+            class="group block"
+            data-astro-prefetch
+          >
+            <div class="aspect-[4/3] overflow-hidden rounded-lg mb-4 bg-paper-200 dark:bg-paper_dark-50">
+              <Image
+                src={album.data.coverPhoto}
+                alt={album.data.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                widths={[400, 600]}
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+            </div>
+            <time
+              datetime={album.data.pubDate.toISOString()}
+              class="text-sm text-ink-400 dark:text-ink_dark-500 font-sans"
+            >
+              {formatDate(album.data.pubDate)}
+            </time>
+            <h2 class="text-xl font-normal text-ink dark:text-ink_dark mt-1 group-hover:text-accent dark:group-hover:text-accent_dark transition-colors duration-300">
+              {album.data.title}
+            </h2>
+            <p class="text-ink-600 dark:text-ink_dark-300 mt-1 text-sm">
+              {album.data.description}
+            </p>
+          </a>
+        );
+      })}
     </div>
-
-    <Content>
-      <p class="text-lg text-davy_gray dark:text-silver_gray-500">
-        Browse my photo albums. Select an album from the list to view.
-      </p>
-    </Content>
-  </div>
+  )}
 </Layout>

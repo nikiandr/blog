@@ -1,26 +1,61 @@
 ---
-  import BlogList from "../../components/BlogList.astro";
-  import Content from "../../components/Content.astro";
+  import { getCollection } from "astro:content";
   import Layout from "../../layouts/layout.astro";
 
   const title = "Blog | Nikita Fordui";
+
+  const allBlogPosts = await getCollection(
+    "blog",
+    ({ data }) => import.meta.env.DEV || !data.draft
+  );
+
+  const sortedPosts = allBlogPosts.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  );
+
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 ---
 <Layout title={title}>
-  <BlogList slot="list-panel"/>
+  <header class="mb-12">
+    <h1
+      class="text-4xl md:text-5xl font-normal text-ink dark:text-ink_dark tracking-tight mb-4"
+    >
+      Blog
+    </h1>
+    <p class="text-lg text-ink-500 dark:text-ink_dark-400 leading-relaxed">
+      Thoughts on technology, design, and building things.
+    </p>
+  </header>
 
-  <div class="hidden lg:block">
-    <div class="mb-10">
-      <h1
-        class="text-6xl md:text-7xl font-light text-payne_gray dark:text-silver_gray leading-[1.1] transition-colors duration-300"
-      >
-        Blog
-      </h1>
+  {sortedPosts.length === 0 ? (
+    <p class="text-lg text-ink-500 dark:text-ink_dark-400">
+      No posts yet. Check back soon.
+    </p>
+  ) : (
+    <div class="space-y-10">
+      {sortedPosts.map((post) => (
+        <article class="group">
+          <a href={`/blog/${post.id}`} class="block" data-astro-prefetch>
+            <time
+              datetime={post.data.pubDate.toISOString()}
+              class="text-sm text-ink-400 dark:text-ink_dark-500 font-sans"
+            >
+              {formatDate(post.data.pubDate)}
+            </time>
+            <h2 class="text-xl md:text-2xl font-normal text-ink dark:text-ink_dark mt-2 group-hover:text-accent dark:group-hover:text-accent_dark transition-colors duration-300">
+              {post.data.title}
+            </h2>
+            <p class="text-ink-600 dark:text-ink_dark-300 mt-2 leading-relaxed">
+              {post.data.description}
+            </p>
+          </a>
+        </article>
+      ))}
     </div>
-
-    <Content>
-      <p class="text-lg text-davy_gray dark:text-silver_gray-500">
-        Welcome to my blog. Select a post from the list to read.
-      </p>
-    </Content>
-  </div>
+  )}
 </Layout>
