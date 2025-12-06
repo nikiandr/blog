@@ -19,6 +19,7 @@
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.15.4",
     "photoswipe": "^5.4.4",
+    "photoswipe-dynamic-caption-plugin": "^1.2.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

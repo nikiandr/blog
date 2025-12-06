@@ -1,3 +1,5 @@
+import PhotoSwipeDynamicCaption from "photoswipe-dynamic-caption-plugin";
+import "photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 import { useEffect } from "react";
@@ -10,9 +12,9 @@ type GalleryProps = {
 };
 
 export const Gallery = ({ images, className = "" }: GalleryProps) => {
-  // Initialize PhotoSwipe lightbox
+  // Initialize PhotoSwipe lightbox with dynamic captions
   useEffect(() => {
-    let lightbox: PhotoSwipeLightbox | null = new PhotoSwipeLightbox({
+    const lightbox = new PhotoSwipeLightbox({
       gallery: `#${GALLERY.ID}`,
       children: "a",
       pswpModule: () => import("photoswipe"),
@@ -20,11 +22,19 @@ export const Gallery = ({ images, className = "" }: GalleryProps) => {
       bgOpacity: 0.9,
     });
 
+    // Initialize dynamic caption plugin
+    const _captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+      type: "auto",
+      captionContent: (slide) => {
+        const img = slide.data.element?.querySelector("img");
+        return img?.getAttribute("alt") || "";
+      },
+    });
+
     lightbox.init();
 
     return () => {
-      lightbox?.destroy();
-      lightbox = null;
+      lightbox.destroy();
     };
   }, []);
 
