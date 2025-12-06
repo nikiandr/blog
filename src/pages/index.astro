@@ -13,106 +13,80 @@
   const recentPosts = allBlogPosts
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
     .slice(0, 3);
-
-  const formatDate = (date: Date) =>
-    date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
 ---
 <Layout title={title}>
   <!-- Hero / Introduction -->
-  <header class="mb-16">
+  <header class="mb-20">
     <h1
-      class="text-4xl md:text-5xl font-normal text-ink dark:text-ink_dark tracking-tight mb-6"
+      class="text-4xl md:text-5xl font-normal text-ink dark:text-ink_dark tracking-tight mb-8"
     >
       Nikita Fordui
     </h1>
     <p
-      class="text-xl text-ink-600 dark:text-ink_dark-300 leading-relaxed max-w-2xl"
+      class="text-xl md:text-[1.35rem] text-ink-600 dark:text-ink_dark-300 leading-relaxed max-w-[38rem]"
     >
-      I write about technology, design, and building things. Currently exploring
-      the intersection of software engineering and creative work.
+      Software engineer exploring how tools shape thinking. Writing on systems
+      design, creative technology, and the craft of building.
     </p>
   </header>
 
-  <!-- Recent Writing -->
-  <section class="mb-16">
-    <div class="flex items-baseline justify-between mb-8">
-      <h2 class="text-2xl font-normal text-ink dark:text-ink_dark">
-        Recent Writing
-      </h2>
-      <a
-        href="/blog"
-        class="text-sm text-ink-500 dark:text-ink_dark-400 hover:text-accent dark:hover:text-accent_dark transition-colors font-sans"
-      >
-        View all &rarr;
-      </a>
-    </div>
-
+  <!-- Writing -->
+  <section class="mb-20">
+    <h2
+      class="text-sm font-sans text-ink-400 dark:text-ink_dark-500 uppercase tracking-wider mb-6"
+    >
+      Best Work
+    </h2>
     {recentPosts.length === 0 ? (
       <p class="text-ink-500 dark:text-ink_dark-400">
         No posts yet. Check back soon.
       </p>
     ) : (
-      <div class="space-y-8">
+      <div class="space-y-6">
         {recentPosts.map((post) => (
           <article class="group">
             <a href={`/blog/${post.id}`} class="block" data-astro-prefetch>
-              <time
-                datetime={post.data.pubDate.toISOString()}
-                class="text-sm text-ink-400 dark:text-ink_dark-500 font-sans"
-              >
-                {formatDate(post.data.pubDate)}
-              </time>
-              <h3 class="text-xl font-normal text-ink dark:text-ink_dark mt-1 group-hover:text-accent dark:group-hover:text-accent_dark transition-colors duration-300">
+              <h3 class="text-xl font-normal text-ink dark:text-ink_dark group-hover:text-accent dark:group-hover:text-accent_dark transition-colors duration-300">
                 {post.data.title}
               </h3>
-              <p class="text-ink-600 dark:text-ink_dark-300 mt-1 leading-relaxed">
+              <p class="text-ink-500 dark:text-ink_dark-400 mt-1 leading-relaxed">
                 {post.data.description}
               </p>
             </a>
           </article>
         ))}
+        <a
+          href="/blog"
+          class="inline-block text-ink-400 dark:text-ink_dark-500 hover:text-accent dark:hover:text-accent_dark transition-colors duration-300 font-sans mt-2"
+        >
+          All writing &rarr;
+        </a>
       </div>
     )}
   </section>
 
-  <!-- Quick Links -->
-  <section>
-    <h2 class="text-2xl font-normal text-ink dark:text-ink_dark mb-6">
-      Explore
-    </h2>
-    <div class="grid gap-4 sm:grid-cols-2">
-      <a
-        href="/photos"
-        class="group block p-5 rounded-lg border border-border/40 dark:border-border-dark/40 hover:border-accent/40 dark:hover:border-accent_dark/40 transition-colors duration-300"
-        data-astro-prefetch
-      >
-        <h3
-          class="text-lg font-medium text-ink dark:text-ink_dark group-hover:text-accent dark:group-hover:text-accent_dark transition-colors"
-        >
-          Photos
-        </h3>
-        <p class="text-sm text-ink-500 dark:text-ink_dark-400 mt-1">
-          Albums from my travels and experiences
-        </p>
-      </a>
-      <a
-        href="/about-me"
-        class="group block p-5 rounded-lg border border-border/40 dark:border-border-dark/40 hover:border-accent/40 dark:hover:border-accent_dark/40 transition-colors duration-300"
-        data-astro-prefetch
-      >
-        <h3
-          class="text-lg font-medium text-ink dark:text-ink_dark group-hover:text-accent dark:group-hover:text-accent_dark transition-colors"
-        >
-          About Me
-        </h3>
-        <p class="text-sm text-ink-500 dark:text-ink_dark-400 mt-1">
-          Learn more about who I am and what I do
-        </p>
-      </a>
-    </div>
-  </section>
+  <!-- Simple Navigation -->
+  <nav class="flex gap-6 text-lg text-ink-500 dark:text-ink_dark-400 font-sans">
+    <a
+      href="/photos"
+      class="hover:text-accent dark:hover:text-accent_dark transition-colors duration-300"
+      data-astro-prefetch
+    >
+      Photos
+    </a>
+    <a
+      href="/about-me"
+      class="hover:text-accent dark:hover:text-accent_dark transition-colors duration-300"
+      data-astro-prefetch
+    >
+      About
+    </a>
+    <a
+      href="/contact"
+      class="hover:text-accent dark:hover:text-accent_dark transition-colors duration-300"
+      data-astro-prefetch
+    >
+      Contact
+    </a>
+  </nav>
 </Layout>

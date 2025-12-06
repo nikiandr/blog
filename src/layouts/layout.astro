@@ -6,6 +6,7 @@
   import "@fontsource/inter-tight/500.css";
   import "@fontsource/inter-tight/600.css";
   import { ClientRouter } from "astro:transitions";
+  import Footer from "../components/Footer.astro";
   import ThemeToggle from "../components/ThemeToggle.astro";
   import "../styles/global.css";
 
@@ -81,13 +82,13 @@
     <ClientRouter/>
   </head>
   <body
-    class="bg-paper dark:bg-paper_dark text-ink-700 dark:text-ink_dark-200 min-h-screen transition-colors duration-300"
+    class="flex flex-col bg-paper dark:bg-paper_dark text-ink-700 dark:text-ink_dark-200 min-h-screen transition-colors duration-300"
   >
     <!-- Site Header -->
     <header
       class="sticky top-0 z-40 bg-paper/95 dark:bg-paper_dark/95 backdrop-blur-sm border-b border-border/30 dark:border-border-dark/30 transition-colors duration-300"
     >
-      <div class="max-w-3xl mx-auto px-6 py-4">
+      <div class="max-w-2xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <!-- Site Title -->
           <a
@@ -165,25 +166,11 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-3xl mx-auto px-6 py-12 md:py-16">
+    <main class="flex-grow max-w-2xl mx-auto px-6 py-12 md:py-20 w-full">
       <slot/>
     </main>
 
-    <!-- Footer -->
-    <footer
-      class="border-t border-border/30 dark:border-border-dark/30 mt-16 transition-colors duration-300"
-    >
-      <div class="max-w-3xl mx-auto px-6 py-10">
-        <div
-          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
-        >
-          <!-- Copyright -->
-          <p class="text-sm text-ink-400 dark:text-ink_dark-500 font-sans">
-            &copy; {new Date().getFullYear()} Nikita Fordui
-          </p>
-        </div>
-      </div>
-    </footer>
+    <Footer/>
 
     <!-- Mobile Menu Script -->
     <script>

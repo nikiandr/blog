@@ -47,6 +47,7 @@ The gallery grid uses Tailwind CSS with responsive auto-rows and dynamic column 
 ### Theming & Dark Mode
 
 Dark mode is implemented with:
+
 - Tailwind's `class` strategy (`darkMode: "class"` in `tailwind.config.js`)
 - Custom color palette with light mode (alice_blue, platinum, davy_gray) and dark mode (dark_slate, silver_gray) variants
 - Theme preference stored in `localStorage` with three modes: `"light"`, `"dark"`, `"system"`
@@ -77,6 +78,7 @@ Blog posts include a sticky table of contents on desktop that's pushed into the 
 ### Static Site Generation
 
 All pages are statically generated at build time using Astro's `getStaticPaths()`:
+
 - Blog posts filter out drafts: `getCollection("blog", ({ data }) => !data.draft)`
 - Albums filter out drafts: `getCollection("albums", ({ data }) => !data.draft)`
 - Dynamic routes are pre-rendered based on collection entries
@@ -88,6 +90,7 @@ The site uses Astro's View Transitions API (`<ClientRouter/>` in layout) for SPA
 ## Code Quality
 
 This project uses **Ultracite** (a Biome preset) for formatting and linting. Always run `npx ultracite fix` before committing. The project enforces:
+
 - TypeScript strict mode (`strictNullChecks: true`)
 - Lint-staged integration: auto-fixes files on commit
 - See `.claude/CLAUDE.md` (the Ultracite rules file) for detailed code standards
@@ -95,11 +98,13 @@ This project uses **Ultracite** (a Biome preset) for formatting and linting. Alw
 ## Content Management
 
 To add new blog posts:
+
 1. Create `.md` or `.mdx` file in `src/articles/`
 2. Include required frontmatter: `title`, `description`, `pubDate`
 3. Optionally add `draft: true` to hide from production, or `coverImage` and `coverImageAlt` for cover images
 
 To add new photo albums:
+
 1. Create directory in `src/albums/[album-name]/`
 2. Add `album.json` with required fields
 3. Place image files in the same directory
@@ -112,3 +117,5 @@ To add new photo albums:
 - **Tailwind CSS 4**: Utility-first styling
 - **PhotoSwipe 5**: Touch-enabled lightbox gallery
 - **Ultracite/Biome**: Zero-config formatting and linting
+- Prefer template strings instead of string concatenation or forming content as part of html
+

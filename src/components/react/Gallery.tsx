@@ -59,8 +59,6 @@ export const Gallery = ({ images, className = "" }: GalleryProps) => {
               data-pswp-width={image.lightbox.width}
               href={image.lightbox.src}
               key={`${GALLERY.ID}--${image.lightbox.src}--${index}`}
-              rel="noreferrer"
-              target="_blank"
             >
               <img
                 alt={image.alt}
