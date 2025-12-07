@@ -28,7 +28,8 @@ const albums = defineCollection({
       coverPhoto: image(),
       photos: z.array(
         z.object({
-          photo: image(),
+          url: z.string().url().optional(),
+          photo: image().optional(),
           description: z.string(),
         })
       ),

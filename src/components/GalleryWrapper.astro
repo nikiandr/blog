@@ -1,20 +1,44 @@
 ---
   import type { ImageMetadata } from "astro";
-  import { transformImageToGalleryImage } from "../libs/gallery/transform";
+  import {
+    fetchCloudinaryDimensions,
+    transformCloudinaryToGalleryImage,
+    transformLocalImageToGalleryImage,
+  } from "../libs/gallery/transform";
   import { Gallery } from "./react/Gallery";
 
+  type PhotoInput = {
+    url?: string;
+    photo?: ImageMetadata;
+    description: string;
+  };
+
   type Props = {
-    images: { photo: ImageMetadata; description: string }[];
+    images: PhotoInput[];
     class?: string;
   };
 
   const { images, class: className } = Astro.props;
 
-  // Transform all images to gallery format
+  // Transform all images to gallery format (Cloudinary URL takes priority)
   const galleryImages = await Promise.all(
-    images.map(async ({ photo, description }) =>
-      transformImageToGalleryImage(photo, description)
-    )
+    images.map(async ({ url, photo, description }) => {
+      if (url) {
+        const { width, height } = await fetchCloudinaryDimensions(url);
+        return transformCloudinaryToGalleryImage(
+          url,
+          width,
+          height,
+          description
+        );
+      }
+      if (photo) {
+        return transformLocalImageToGalleryImage(photo, description);
+      }
+      throw new Error(
+        `Photo missing both url and photo fields: ${description}`
+      );
+    })
   );
 ---
 <Gallery client:only="react" images={galleryImages} className={className}/>
