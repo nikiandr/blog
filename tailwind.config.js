@@ -30,13 +30,13 @@ export default {
       colors: {
         // Light mode - Warm paper tones
         paper: {
-          DEFAULT: "#faf8f5",
-          50: "#fdfcfb",
-          100: "#fdfcfa",
-          200: "#f4f1eb",
-          300: "#ede8e0",
-          400: "#e5dfd4",
-          500: "#d4cdc1",
+          DEFAULT: "#f5f0e6",
+          50: "#faf7f2",
+          100: "#f7f3ec",
+          200: "#efe9dc",
+          300: "#e6dece",
+          400: "#dcd2bf",
+          500: "#cec3ad",
         },
         ink: {
           DEFAULT: "#1a1814",
