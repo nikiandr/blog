@@ -1,19 +1,20 @@
 ---
-  import { getCollection } from "astro:content";
-  import Layout from "../layouts/layout.astro";
+import { getCollection } from "astro:content";
+import Layout from "../layouts/layout.astro";
 
-  const title = "Nikita Fordui";
+const title = "Nikita Fordui";
 
-  // Get recent blog posts
-  const allBlogPosts = await getCollection(
-    "blog",
-    ({ data }) => import.meta.env.DEV || !data.draft
-  );
+// Get recent blog posts
+const allBlogPosts = await getCollection(
+  "blog",
+  ({ data }) => import.meta.env.DEV || !data.draft
+);
 
-  const recentPosts = allBlogPosts
-    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-    .slice(0, 3);
+const recentPosts = allBlogPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
 ---
+
 <Layout title={title}>
   <!-- Hero / Introduction -->
   <header class="mb-20">
@@ -25,8 +26,9 @@
     <p
       class="text-xl md:text-[1.35rem] text-ink-600 dark:text-ink_dark-300 leading-relaxed max-w-[38rem]"
     >
-      Software engineer exploring how tools shape thinking. Writing on systems
-      design, creative technology, and the craft of building.
+      Currently - Founding Engineer @ Crosscheck. In general - software
+      developer trying to find a place between art, science and teaching which I
+      can spend my life on.
     </p>
   </header>
 
