@@ -1,0 +1,73 @@
+{
+  "title": "Tartu Summer Evening",
+  "description": "Evening walk through Tartu testing out new camera",
+  "pubDate": "2026-07-23",
+  "draft": false,
+  "tripDates": [
+    "2026-07-10",
+    "2026-07-10"
+  ],
+  "coverPhoto": "IMG_3288.jpg",
+  "photos": [
+    {
+      "photo": "IMG_3288.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843366/Tartu%20Summer%20Evening/IMG_3288.jpg",
+      "description": "Tigutorn on gray sky, view from near Maxima"
+    },
+    {
+      "photo": "IMG_3289.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843368/Tartu%20Summer%20Evening/IMG_3289.jpg",
+      "description": "Clock tower on Raekoja, dutch-ish angle"
+    },
+    {
+      "photo": "IMG_3287.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843364/Tartu%20Summer%20Evening/IMG_3287.jpg",
+      "description": "Boat on Emajogi passing through"
+    },
+    {
+      "photo": "IMG_3286.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843362/Tartu%20Summer%20Evening/IMG_3286.jpg",
+      "description": "Arc bridge near Delta"
+    },
+    {
+      "photo": "IMG_3285.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843145/Tartu%20Summer%20Evening/IMG_3285.jpg",
+      "description": "Girls enjoying the silence"
+    },
+    {
+      "photo": "IMG_3296.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843382/Tartu%20Summer%20Evening/IMG_3296.jpg",
+      "description": "Girl trying to run away"
+    },
+    {
+      "photo": "IMG_3295.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843380/Tartu%20Summer%20Evening/IMG_3295.jpg",
+      "description": "Couple walking through the tree arc"
+    },
+    {
+      "photo": "IMG_3294.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843377/Tartu%20Summer%20Evening/IMG_3294.jpg",
+      "description": "Date night near the river"
+    },
+    {
+      "photo": "IMG_3293.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843376/Tartu%20Summer%20Evening/IMG_3293.jpg",
+      "description": "Couple on the bridge"
+    },
+    {
+      "photo": "IMG_3292.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843374/Tartu%20Summer%20Evening/IMG_3292.jpg",
+      "description": "Tartu version of people in a hurry"
+    },
+    {
+      "photo": "IMG_3291.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843372/Tartu%20Summer%20Evening/IMG_3291.jpg",
+      "description": "Hard day of work"
+    },
+    {
+      "photo": "IMG_3290.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1784843370/Tartu%20Summer%20Evening/IMG_3290.jpg",
+      "description": "Love will call"
+    }
+  ]
+}
