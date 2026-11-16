@@ -1,0 +1,40 @@
+{
+  "title": "Tartu Autumn",
+  "description": "Golden autumn walk around Tartu photo dump",
+  "pubDate": "2026-11-16",
+  "draft": false,
+  "tripDates": ["2026-10-19", "2026-11-13"],
+  "coverPhoto": "DSC08048.jpg",
+  "photos": [
+    {
+      "photo": "DSC08048.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1794812526/Tartu%20Autumn/DSC08048.jpg",
+      "description": "Maple leaves against the sun"
+    },
+    {
+      "photo": "DSC08011.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1794812525/Tartu%20Autumn/DSC08011.jpg",
+      "description": "Painted pillar on the old stone steps, covered in leaves"
+    },
+    {
+      "photo": "DSC08318.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1794812528/Tartu%20Autumn/DSC08318.jpg",
+      "description": "Someone walking their dog under the yellow trees"
+    },
+    {
+      "photo": "DSC08286.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1794812527/Tartu%20Autumn/DSC08286.jpg",
+      "description": "Trees going full orange over the blue wooden house"
+    },
+    {
+      "photo": "DSC08339.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1794812530/Tartu%20Autumn/DSC08339.jpg",
+      "description": "Bike path sign by the lake, pointing to Tüki"
+    },
+    {
+      "photo": "DSC08408.jpg",
+      "url": "https://res.cloudinary.com/dti4hpv7w/image/upload/v1794812531/Tartu%20Autumn/DSC08408.jpg",
+      "description": "Three guys on an evening walk, one of them in uniform"
+    }
+  ]
+}
